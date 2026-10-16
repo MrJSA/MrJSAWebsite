@@ -434,3 +434,73 @@ p {
 	color: var(--text);
 	font-weight: 600;
 }
+
+/* ── Effects ───────────────────────────────────────────────────── */
+
+/* Headline decode (see `$lib/actions/scramble.ts`): hidden until the script
+   starts it; the failsafe reveals it anyway if JavaScript never runs. */
+.js [data-scramble] {
+	visibility: hidden;
+	animation: scramble-failsafe 0s 2.5s forwards;
+}
+@keyframes scramble-failsafe {
+	to {
+		visibility: visible;
+	}
+}
+
+/* Spotlight: a glowing border + soft fill that follows the cursor over any
+   `.spotlight` element. Cursor position is set by the layout (--mx / --my). */
+.spotlight::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	border-radius: inherit;
+	padding: 1px;
+	background: radial-gradient(
+		340px circle at var(--mx, 50%) var(--my, 50%),
+		var(--accent),
+		transparent 45%
+	);
+	-webkit-mask:
+		linear-gradient(#000 0 0) content-box,
+		linear-gradient(#000 0 0);
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	opacity: 0;
+	transition: opacity 0.35s var(--ease);
+	pointer-events: none;
+}
+.spotlight:hover::before {
+	opacity: 1;
+}
+.spotlight:hover {
+	background-image: radial-gradient(
+		520px circle at var(--mx, 50%) var(--my, 50%),
+		var(--accent-soft),
+		transparent 45%
+	);
+}
+
+/* Page transitions (View Transitions API, see +layout.svelte). */
+::view-transition-old(root) {
+	animation: vt-out 0.22s var(--ease) both;
+}
+::view-transition-new(root) {
+	animation: vt-in 0.4s var(--ease) both;
+}
+@keyframes vt-out {
+	to {
+		opacity: 0;
+		transform: translateY(-8px);
+		filter: blur(4px);
+	}
+}
+@keyframes vt-in {
+	from {
+		opacity: 0;
+		transform: translateY(14px);
+		filter: blur(6px);
+	}
+}

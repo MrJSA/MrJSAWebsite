@@ -3,18 +3,30 @@
 	import type { MarqueeSection } from './types';
 
 	let { section }: SectionProps<MarqueeSection> = $props();
+
+	// The second row runs the other way, in outline, with the items in reverse order.
+	const rows = $derived(
+		(section.rows ?? 2) === 2 ? [section.items, [...section.items].reverse()] : [section.items]
+	);
 </script>
 
 <section class="marquee" id={section.id} aria-label={section.items.join(', ')}>
-	<div class="track" style="--speed: {section.speed ?? 40}s" aria-hidden="true">
-		{#each [0, 1] as copy (copy)}
-			<ul>
-				{#each section.items as item (item)}
-					<li>{item}</li>
-				{/each}
-			</ul>
-		{/each}
-	</div>
+	{#each rows as items, r (r)}
+		<div
+			class="track"
+			class:reverse={r === 1}
+			style="--speed: {(section.speed ?? 40) * (r === 1 ? 1.25 : 1)}s"
+			aria-hidden="true"
+		>
+			{#each [0, 1] as copy (copy)}
+				<ul>
+					{#each items as item (item)}
+						<li>{item}</li>
+					{/each}
+				</ul>
+			{/each}
+		</div>
+	{/each}
 </section>
 
 <style>
@@ -32,6 +44,21 @@
 	}
 	.marquee:hover .track {
 		animation-play-state: paused;
+	}
+	.track.reverse {
+		margin-top: 10px;
+		animation-direction: reverse;
+	}
+	.reverse li {
+		color: transparent;
+		-webkit-text-stroke: 1px var(--border-strong);
+	}
+	.reverse li:hover {
+		-webkit-text-stroke-color: var(--accent);
+	}
+	.reverse li::after {
+		background: transparent;
+		border: 1.5px solid var(--accent);
 	}
 	ul {
 		display: flex;

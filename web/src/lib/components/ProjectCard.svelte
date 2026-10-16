@@ -7,7 +7,7 @@
 	let { project, delay = 0 }: { project: Project; delay?: number } = $props();
 </script>
 
-<a class="card project" href="/projects/{project.slug}/" use:reveal={delay}>
+<a class="card project spotlight" href="/projects/{project.slug}/" use:reveal={delay}>
 	<Cover src={project.cover} alt={project.title} seed={project.slug} label={project.category} />
 	<div class="body">
 		<div class="meta">

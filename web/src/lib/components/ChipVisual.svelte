@@ -57,6 +57,11 @@
 					<stop offset="0" stop-color="#fff" stop-opacity="0.14" />
 					<stop offset="0.45" stop-color="#fff" stop-opacity="0" />
 				</linearGradient>
+				<linearGradient id="cv-sweep" x1="0" y1="0" x2="1" y2="0">
+					<stop offset="0" stop-color="#7dff8a" stop-opacity="0" />
+					<stop offset="0.5" stop-color="#d9ffdd" stop-opacity="0.45" />
+					<stop offset="1" stop-color="#7dff8a" stop-opacity="0" />
+				</linearGradient>
 				<filter id="cv-glow" x="-50%" y="-50%" width="200%" height="200%">
 					<feGaussianBlur stdDeviation="4" result="b" />
 					<feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
@@ -65,27 +70,54 @@
 
 			<rect width={SIZE} height={SIZE} fill="var(--brand-board)" />
 
-			{#each sides as deg (deg)}
+			<!-- Boot sequence: traces route in from the edges → pads tin → chip seats →
+			     power-on sweep → pin-1 LED → signals start flowing. -->
+			{#each sides as deg, s (deg)}
 				<g transform="rotate({deg} {SIZE / 2} {SIZE / 2})">
 					{#each traces as d, i (i)}
-						<path {d} class="trace-edge" />
-						<path {d} class="trace" />
-						<path
-							{d}
-							class="pulse"
-							filter="url(#cv-glow)"
-							style="--d: {((i * 7 + deg / 30) % 11) * -0.55}s; --t: {3.2 + ((i + deg / 90) % 4) * 0.7}s"
-						/>
+						{@const boot = `--b: ${0.1 + s * 0.08 + i * 0.07}s`}
+						<path {d} pathLength="1" class="trace-edge draw" style={boot} />
+						<path {d} pathLength="1" class="trace draw" style={boot} />
 					{/each}
-					{#each pads as x (x)}
-						<rect {x} y={C0 - PAD_L} width={PAD_W} height={PAD_L + 2} class="pad" />
+					<g class="pulses">
+						{#each traces as d, i (i)}
+							<path
+								{d}
+								class="pulse"
+								filter="url(#cv-glow)"
+								style="--d: {((i * 7 + deg / 30) % 11) * -0.55}s; --t: {3.2 + ((i + deg / 90) % 4) * 0.7}s"
+							/>
+						{/each}
+					</g>
+					{#each pads as x, i (x)}
+						<rect
+							{x}
+							y={C0 - PAD_L}
+							width={PAD_W}
+							height={PAD_L + 2}
+							class="pad"
+							style="--b: {0.75 + s * 0.05 + i * 0.04}s"
+						/>
 					{/each}
 				</g>
 			{/each}
 
-			<rect x={C0} y={C0} width={CHIP} height={CHIP} fill="var(--brand-chip)" />
-			<image href="/chip.webp" x={C0} y={C0} width={CHIP} height={CHIP} />
-			<rect x={C0} y={C0} width={CHIP} height={CHIP} fill="url(#cv-sheen)" />
+			<g class="chip">
+				<rect x={C0} y={C0} width={CHIP} height={CHIP} fill="var(--brand-chip)" />
+				<image href="/chip.webp" x={C0} y={C0} width={CHIP} height={CHIP} />
+				<rect x={C0} y={C0} width={CHIP} height={CHIP} fill="url(#cv-sheen)" />
+				<clipPath id="cv-chip-clip"><rect x={C0} y={C0} width={CHIP} height={CHIP} /></clipPath>
+				<rect
+					class="sweep"
+					x={C0 - CHIP}
+					y={C0}
+					width={CHIP * 0.6}
+					height={CHIP}
+					fill="url(#cv-sweep)"
+					clip-path="url(#cv-chip-clip)"
+				/>
+				<circle class="led" cx={C0 + 265} cy={C0 + 32} r="11" filter="url(#cv-glow)" />
+			</g>
 			<rect width={SIZE} height={SIZE} fill="url(#cv-light)" />
 		</svg>
 	</div>
@@ -139,6 +171,90 @@
 	}
 	.pad {
 		fill: var(--brand-pad);
+		animation: pad-on 0.5s var(--ease) var(--b) both;
+	}
+
+	/* ── Boot sequence ── */
+	.draw {
+		stroke-dasharray: 1;
+		animation: route 0.9s cubic-bezier(0.6, 0, 0.2, 1) var(--b) both;
+	}
+	@keyframes route {
+		from {
+			stroke-dashoffset: -1;
+		}
+		to {
+			stroke-dashoffset: 0;
+		}
+	}
+	@keyframes pad-on {
+		from {
+			opacity: 0;
+			fill: #ffffff;
+		}
+		40% {
+			opacity: 1;
+			fill: #ffffff;
+		}
+	}
+	.chip {
+		transform-box: fill-box;
+		transform-origin: center;
+		animation: seat 0.7s cubic-bezier(0.2, 1.4, 0.4, 1) 1s both;
+	}
+	@keyframes seat {
+		from {
+			opacity: 0;
+			transform: scale(1.18);
+		}
+	}
+	.sweep {
+		animation: sweep 0.9s var(--ease) 1.55s both;
+	}
+	@keyframes sweep {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(780px);
+		}
+	}
+	.led {
+		fill: #7dff8a;
+		opacity: 0;
+		animation:
+			led-on 0.6s ease-out 2s forwards,
+			breathe 3.2s ease-in-out 2.6s infinite;
+	}
+	@keyframes led-on {
+		0%,
+		30%,
+		60% {
+			opacity: 0;
+		}
+		15%,
+		45%,
+		100% {
+			opacity: 0.85;
+		}
+	}
+	@keyframes breathe {
+		0%,
+		100% {
+			opacity: 0.85;
+		}
+		50% {
+			opacity: 0.25;
+		}
+	}
+	.pulses {
+		opacity: 0;
+		animation: fade-in 0.8s ease 2.1s forwards;
+	}
+	@keyframes fade-in {
+		to {
+			opacity: 1;
+		}
 	}
 	@keyframes pulse {
 		from {

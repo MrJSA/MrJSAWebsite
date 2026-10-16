@@ -14,7 +14,7 @@
 			<SectionHeader eyebrow={section.eyebrow} title={section.title} />
 			<div class="grid">
 				{#each data.services as s, i (s.slug)}
-					<article class="card service" use:reveal={i * 80}>
+					<article class="card service spotlight" use:reveal={i * 80}>
 						<span class="num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
 						<div class="icon"><Icon name={s.icon ?? 'layers'} size={24} /></div>
 						<h3>{s.title}</h3>

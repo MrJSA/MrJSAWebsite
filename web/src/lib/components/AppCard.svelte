@@ -7,7 +7,7 @@
 	let { app, delay = 0 }: { app: App; delay?: number } = $props();
 </script>
 
-<article class="card app" use:reveal={delay}>
+<article class="card app spotlight" use:reveal={delay}>
 	<a class="top" href="/apps/{app.slug}/">
 		<div class="icon">
 			{#if app.icon}

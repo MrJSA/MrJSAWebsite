@@ -5,14 +5,41 @@
 	import '@fontsource/chakra-petch/latin-700.css';
 	import '@fontsource-variable/jetbrains-mono';
 	import '#lib/styles/global.css';
+	import { onNavigate } from '$app/navigation';
 	import Footer from '#lib/components/Footer.svelte';
 	import Header from '#lib/components/Header.svelte';
+	import ScrollTrace from '#lib/components/ScrollTrace.svelte';
 
 	let { data, children } = $props();
+
+	// Smooth cross-fade between pages where the browser supports View Transitions.
+	onNavigate((navigation) => {
+		if (!document.startViewTransition || navigation.from?.url.pathname === navigation.to?.url.pathname)
+			return;
+		if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
+
+	// One listener feeds the cursor position to whichever `.spotlight` card is hovered.
+	function spotlight(e: PointerEvent) {
+		const el = (e.target as Element | null)?.closest?.<HTMLElement>('.spotlight');
+		if (!el) return;
+		const r = el.getBoundingClientRect();
+		el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+		el.style.setProperty('--my', `${e.clientY - r.top}px`);
+	}
 </script>
+
+<svelte:document onpointermove={spotlight} />
 
 <a class="skip" href="#main">Skip to content</a>
 <Header />
+<ScrollTrace />
 <main id="main">
 	{@render children()}
 </main>

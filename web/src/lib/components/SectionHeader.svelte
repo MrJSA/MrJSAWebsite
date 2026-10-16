@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { reveal } from '#lib/actions/reveal.js';
+	import { scramble } from '#lib/actions/scramble.js';
 
 	let {
 		eyebrow,
@@ -14,7 +15,11 @@
 	<div>
 		{#if eyebrow}<span class="eyebrow">{eyebrow}</span>{/if}
 		{#if title}
-			<svelte:element this={level === 1 ? 'h1' : 'h2'} class="section-title">{title}</svelte:element>
+			<svelte:element
+				this={level === 1 ? 'h1' : 'h2'}
+				class="section-title"
+				use:scramble={{ trigger: 'visible', speed: 26 }}>{title}</svelte:element
+			>
 		{/if}
 	</div>
 	{#if children}<div class="extra">{@render children()}</div>{/if}

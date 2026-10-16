@@ -28,6 +28,8 @@ export interface MarqueeSection extends SectionBase {
 	items: string[];
 	/** Seconds for one full loop. */
 	speed?: number;
+	/** 2 (default) adds a second, reversed row in outline type. */
+	rows?: 1 | 2;
 }
 
 export interface ServicesSection extends SectionBase {

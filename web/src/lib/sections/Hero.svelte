@@ -1,26 +1,51 @@
 <script lang="ts">
 	import ChipVisual from '#lib/components/ChipVisual.svelte';
 	import Icon from '#lib/components/Icon.svelte';
+	import { scramble } from '#lib/actions/scramble.js';
 	import type { SectionProps } from './registry';
 	import type { HeroSection } from './types';
 
 	let { section }: SectionProps<HeroSection> = $props();
 	const lines = $derived(section.title.split('\n'));
+
+	// Cursor position inside the hero — drives the lit-up grid around the pointer.
+	let hero: HTMLElement;
+	let lit = $state(false);
+	let raf = 0;
+	function track(e: PointerEvent) {
+		if (e.pointerType !== 'mouse') return;
+		cancelAnimationFrame(raf);
+		raf = requestAnimationFrame(() => {
+			const r = hero.getBoundingClientRect();
+			hero.style.setProperty('--hx', `${e.clientX - r.left}px`);
+			hero.style.setProperty('--hy', `${e.clientY - r.top}px`);
+			lit = true;
+		});
+	}
+	const unlight = () => (lit = false);
+
+	// Purely decorative, so listeners are attached here rather than as element handlers.
+	$effect(() => {
+		hero.addEventListener('pointermove', track);
+		hero.addEventListener('pointerleave', unlight);
+		return () => {
+			hero.removeEventListener('pointermove', track);
+			hero.removeEventListener('pointerleave', unlight);
+		};
+	});
 </script>
 
-<section class="hero" id={section.id}>
+<section class="hero" class:lit id={section.id} bind:this={hero}>
+	<div class="dots" aria-hidden="true"></div>
+	<div class="dots dots-lit" aria-hidden="true"></div>
 	<svg class="circuit" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
 		<defs>
-			<pattern id="hero-grid" width="28" height="28" patternUnits="userSpaceOnUse">
-				<circle cx="1.5" cy="1.5" r="1.2" fill="var(--grid-line)" />
-			</pattern>
 			<radialGradient id="hero-fade" cx="70%" cy="35%" r="70%">
 				<stop offset="0" stop-color="#fff" />
 				<stop offset="1" stop-color="#000" />
 			</radialGradient>
 			<mask id="hero-mask"><rect width="1200" height="700" fill="url(#hero-fade)" /></mask>
 		</defs>
-		<rect width="1200" height="700" fill="url(#hero-grid)" />
 		<g mask="url(#hero-mask)" fill="none" stroke="var(--trace)" stroke-width="2">
 			<path d="M640 0v120l60 60h220l40 40v160" />
 			<path d="M1200 140H980l-40 40v60" />
@@ -51,7 +76,11 @@
 			{#if section.eyebrow}<span class="eyebrow">{section.eyebrow}</span>{/if}
 			<h1>
 				{#each lines as line, i (i)}
-					<span class:grad={i === lines.length - 1}>{line}</span>
+					<span
+						class:grad={i === lines.length - 1}
+						data-scramble
+						use:scramble={{ delay: 150 + i * 280, speed: 34 }}>{line}</span
+					>
 				{/each}
 			</h1>
 			<p class="lead">{section.lead}</p>
@@ -93,6 +122,30 @@
 		padding-top: calc(var(--header-h) + clamp(56px, 10vw, 120px));
 		padding-bottom: clamp(64px, 10vw, 120px);
 		isolation: isolate;
+	}
+	/* Dot grid; an accent-coloured copy is revealed in a circle around the cursor. */
+	.dots {
+		position: absolute;
+		inset: 0;
+		z-index: -3;
+		background-image: radial-gradient(var(--grid-line) 1.3px, transparent 1.6px);
+		background-size: 28px 28px;
+	}
+	.dots-lit {
+		z-index: -1;
+		background-image: radial-gradient(var(--accent) 1.4px, transparent 1.7px);
+		opacity: 0;
+		transition: opacity 0.5s var(--ease);
+		--spot: radial-gradient(
+			240px circle at var(--hx, -999px) var(--hy, -999px),
+			#000,
+			transparent
+		);
+		mask-image: var(--spot);
+		-webkit-mask-image: var(--spot);
+	}
+	.lit .dots-lit {
+		opacity: 0.75;
 	}
 	.circuit {
 		position: absolute;

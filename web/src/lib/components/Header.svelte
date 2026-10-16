@@ -57,6 +57,8 @@
 		position: sticky;
 		top: 0;
 		z-index: 50;
+		/* Stays put while the page content cross-fades on navigation. */
+		view-transition-name: site-header;
 		height: var(--header-h);
 		border-bottom: 1px solid transparent;
 		transition:
