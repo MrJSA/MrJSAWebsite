@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { reveal } from '#lib/actions/reveal.js';
+	import GlitchPortrait from '#lib/components/GlitchPortrait.svelte';
 	import type { SectionProps } from './registry';
 	import type { AboutSection } from './types';
 
@@ -7,10 +8,15 @@
 </script>
 
 <section class="section" id={section.id}>
-	<div class="container grid">
-		<div use:reveal>
+	<div class="container grid" class:with-portrait={section.portrait}>
+		<div class="head" use:reveal>
 			{#if section.eyebrow}<span class="eyebrow">{section.eyebrow}</span>{/if}
 			{#if section.title}<h2 class="section-title">{section.title}</h2>{/if}
+			{#if section.portrait}
+				<div class="portrait">
+					<GlitchPortrait {...section.portrait} />
+				</div>
+			{/if}
 		</div>
 		<div class="text" use:reveal={100}>
 			{#each section.paragraphs as p, i (i)}<p>{p}</p>{/each}
@@ -33,6 +39,13 @@
 		display: grid;
 		grid-template-columns: 0.9fr 1.1fr;
 		gap: clamp(24px, 6vw, 80px);
+	}
+	.with-portrait {
+		align-items: center;
+	}
+	.portrait {
+		margin-top: 32px;
+		max-width: 460px;
 	}
 	.text {
 		display: grid;

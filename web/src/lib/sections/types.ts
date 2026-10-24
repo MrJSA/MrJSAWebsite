@@ -56,6 +56,8 @@ export interface AboutSection extends SectionBase {
 	type: 'about';
 	paragraphs: string[];
 	facts?: { label: string; value: string }[];
+	/** Rendered as an interactive glitch portrait. `src` needs a transparent background. */
+	portrait?: { src: string; alt: string; label?: string };
 }
 
 export interface ContactSection extends SectionBase {
