@@ -38,9 +38,13 @@
 			{/if}
 		</header>
 
-		<div class="cover card">
-			<Cover src={p.cover} alt={p.title} seed={p.slug} />
-		</div>
+		{#if p.cover}
+			<div class="cover card">
+				<Cover src={p.cover} alt={p.title} seed={p.slug} />
+			</div>
+		{:else}
+			<hr class="rule" />
+		{/if}
 
 		<div class="layout">
 			<div class="prose">{@html p.html}</div>
@@ -109,6 +113,12 @@
 	.cover :global(.cover) {
 		aspect-ratio: 21 / 9;
 		border-bottom: 0;
+	}
+	.rule {
+		margin: 56px 0 0;
+		height: 1px;
+		border: 0;
+		background: linear-gradient(90deg, var(--accent), var(--border) 30%, transparent);
 	}
 	.layout {
 		display: grid;
