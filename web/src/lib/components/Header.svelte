@@ -38,6 +38,10 @@
 		</nav>
 
 		<div class="actions">
+			<a class="shop" href={site.shop.href}>
+				<Icon name={site.shop.icon} size={16} />
+				<span>{site.shop.label}</span>
+			</a>
 			<ThemeToggle />
 			<button
 				class="menu"
@@ -107,6 +111,28 @@
 		align-items: center;
 		gap: 8px;
 	}
+	.shop {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+		height: 38px;
+		padding: 0 14px;
+		border-radius: 999px;
+		border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+		background: var(--accent-soft);
+		color: var(--accent);
+		font-size: 0.9rem;
+		font-weight: 600;
+		transition:
+			background 0.2s,
+			color 0.2s,
+			box-shadow 0.2s;
+	}
+	.shop:hover {
+		background: var(--accent);
+		color: var(--accent-ink);
+		box-shadow: var(--glow);
+	}
 	.menu {
 		display: none;
 		place-items: center;
@@ -122,6 +148,9 @@
 	@media (max-width: 760px) {
 		.menu {
 			display: grid;
+		}
+		.shop {
+			padding: 0 12px;
 		}
 		nav {
 			position: absolute;

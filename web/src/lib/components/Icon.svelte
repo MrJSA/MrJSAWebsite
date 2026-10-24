@@ -23,7 +23,8 @@
 		close: '<path d="M6 6l12 12M18 6L6 18"/>',
 		back: '<path d="M19 12H5M11 18l-6-6 6-6"/>',
 		user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
-		layers: '<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>'
+		layers: '<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',
+		bag: '<path d="M5 8h14l-1.2 11.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/>'
 	};
 
 	export function hasIcon(name: string | undefined): boolean {

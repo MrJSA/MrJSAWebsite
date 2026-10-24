@@ -27,6 +27,15 @@ cd web && npm run build && cd ..
 cargo run            # http://localhost:8080 (PORT / SITE_DIR env vars to override)
 ```
 
+Or as a container next to the locally running webshop (whose storefront uses port 8080):
+
+```sh
+docker build --build-arg SHOP_URL=http://localhost:8080 -t mrjsa-website:local .
+docker run -d --name mrjsa-website-local -p 127.0.0.1:3000:8080 --read-only --cap-drop ALL mrjsa-website:local
+```
+
+The "Shop" links point to `https://shop.mrjsa.com` unless `SHOP_URL` (Docker) / `VITE_SHOP_URL` (npm) is set.
+
 ## Add / change content
 
 | What | How |
@@ -45,9 +54,10 @@ Images go in `web/static/images/…` and are referenced as `/images/…`.
 
 ## Before going live
 
-- [ ] `web/src/lib/config/site.ts` → set `url` and `email`
-- [ ] `web/content/pages/imprint.md` → fill in all `[placeholders]` (Impressum is mandatory in Germany)
-- [ ] `web/content/pages/privacy.md` → fill in placeholders, describe your reverse proxy / hosting logs
+- [ ] `web/src/lib/config/site.ts` → final `email` (currently shop@mrjsa.com) and `url` if the site moves to a subdomain
+- [ ] `web/content/pages/privacy.md` → describe reverse proxy logging (does it store IPs? how long?)
+- [ ] Conclude the data processing agreements (AVV) the privacy policy mentions: netcup (Customer Control Panel) and IONOS (customer area)
+- [ ] Reverse proxy: serve HTTPS only (redirect HTTP), and either disable access logs or rotate them (e.g. 7 days) — whatever the privacy policy says
 
 ## Deploy
 

@@ -14,9 +14,9 @@ export const site = {
 	shortName: 'MrJSA',
 	owner: 'Joshua Schulz-Andres',
 	/** Public URL without trailing slash. Used for canonical links, Open Graph and the sitemap. */
-	url: 'https://example.com', // TODO: set to your real domain
+	url: 'https://mrjsa.com', // TODO: change if the site moves to a subdomain
 	/** Shown publicly; also the fallback contact for app privacy pages. */
-	email: 'hello@example.com', // TODO: set to your real address
+	email: 'shop@mrjsa.com', // TODO: switch to the final address
 	lang: 'en',
 	title: 'MrJSA Technologies — PCB Design, Embedded & Software',
 	description:
@@ -25,6 +25,18 @@ export const site = {
 	ogImage: '/og.png',
 	/** Square logo under `web/static` (header, structured data). */
 	logo: '/logo-256.webp',
+
+	/**
+	 * The webshop (separate app on the same server). Set `VITE_SHOP_URL` at build time to
+	 * point elsewhere, e.g. `docker build --build-arg SHOP_URL=http://localhost:8080 .`
+	 */
+	shop: {
+		label: 'Shop',
+		href:
+			import.meta.env.VITE_SHOP_URL ||
+			(import.meta.env.DEV ? 'http://localhost:8080' : 'https://shop.mrjsa.com'),
+		icon: 'bag'
+	} satisfies Link,
 
 	nav: [
 		{ label: 'Services', href: '/#services' },
@@ -110,6 +122,11 @@ export const home: HomeSection[] = [
 			'I’m an engineer who enjoys the full journey of a product: from the first sketch of a circuit, through the board layout and firmware, all the way to the app in the store.',
 			'With MrJSA Technologies I build my own products and help others bring theirs to life — pragmatic, well documented and built to last.'
 		],
+		portrait: {
+			src: '/images/portrait/joshua.webp',
+			alt: 'Portrait of Joshua Schulz-Andres',
+			label: 'joshua.bin'
+		},
 		facts: [
 			{ label: 'Based in', value: 'Germany' },
 			{ label: 'Focus', value: 'PCBs, embedded, apps' },

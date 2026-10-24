@@ -6,6 +6,10 @@ WORKDIR /web
 COPY web/package.json web/package-lock.json ./
 RUN npm ci --no-audit --no-fund
 COPY web/ ./
+# Where the "Shop" links point. Override for local testing:
+#   docker build --build-arg SHOP_URL=http://localhost:8080 -t mrjsa-website:local .
+ARG SHOP_URL=https://shop.mrjsa.com
+ENV VITE_SHOP_URL=$SHOP_URL
 RUN npm run build
 
 # ── 2. Build the Rust server as a static musl binary ─────────────────
