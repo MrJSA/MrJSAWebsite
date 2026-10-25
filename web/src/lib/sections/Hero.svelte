@@ -140,6 +140,8 @@
 		padding-top: calc(var(--header-h) + clamp(56px, 10vw, 120px));
 		padding-bottom: clamp(64px, 10vw, 120px);
 		isolation: isolate;
+		/* Opaque, so the page-wide DotField doesn't double up with the hero's own grid. */
+		background: var(--bg);
 	}
 	/* Dot grid; an accent-coloured copy is revealed in a circle around the cursor. */
 	.dots {

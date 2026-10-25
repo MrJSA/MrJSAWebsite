@@ -75,8 +75,17 @@
 						</g>
 					</g>
 				{/each}
-				<image href="/chip.webp" x={C0} y={C0} width={CHIP} height={CHIP} />
+				<defs>
+					<linearGradient id="shop-sheen" x1="0" y1="0" x2="1" y2="1">
+						<stop offset="0" stop-color="#fff" stop-opacity="0.14" />
+						<stop offset="0.45" stop-color="#fff" stop-opacity="0" />
+					</linearGradient>
+				</defs>
+				<!-- Chip body styled like the logo chip, labelled in the same silkscreen lettering. -->
 				<rect class="body" x={C0} y={C0} width={CHIP} height={CHIP} />
+				<rect x={C0} y={C0} width={CHIP} height={CHIP} fill="url(#shop-sheen)" />
+				<circle class="pin1" cx={C0 + 18} cy={C0 + 18} r="5" />
+				<text x={SIZE / 2} y={SIZE / 2}>SHOP</text>
 			</svg>
 		</div>
 	</div>
@@ -260,10 +269,21 @@
 	.pins rect {
 		fill: var(--brand-pad);
 	}
-	/* Thin edge highlight over the chip artwork. */
 	.body {
-		fill: none;
+		fill: var(--brand-chip);
 		stroke: rgb(255 255 255 / 0.12);
+	}
+	.pin1 {
+		fill: var(--brand-silk);
+	}
+	text {
+		fill: var(--brand-silk);
+		font-family: var(--font-display);
+		font-size: 44px;
+		font-weight: 700;
+		letter-spacing: 0.02em;
+		text-anchor: middle;
+		dominant-baseline: central;
 	}
 
 	@media (max-width: 860px) {

@@ -97,7 +97,8 @@ export const home: HomeSection[] = [
 	{
 		type: 'shop',
 		id: 'shop',
-		title: 'Shop',
+		eyebrow: 'Shop',
+		title: 'Straight from\nthe workbench.',
 		lead: 'Products designed and built by MrJSA Technologies — order them directly in the official shop.',
 		features: ['Designed & built in-house', 'Secure checkout', 'Shipped from Germany'],
 		cta: 'Visit the shop'

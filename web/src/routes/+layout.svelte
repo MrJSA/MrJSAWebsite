@@ -6,6 +6,7 @@
 	import '@fontsource-variable/jetbrains-mono';
 	import '#lib/styles/global.css';
 	import { onNavigate } from '$app/navigation';
+	import DotField from '#lib/components/DotField.svelte';
 	import Footer from '#lib/components/Footer.svelte';
 	import Header from '#lib/components/Header.svelte';
 	import ScrollTrace from '#lib/components/ScrollTrace.svelte';
@@ -37,6 +38,7 @@
 
 <svelte:document onpointermove={spotlight} />
 
+<DotField />
 <a class="skip" href="#main">Skip to content</a>
 <Header />
 <ScrollTrace />
