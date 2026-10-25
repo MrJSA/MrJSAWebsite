@@ -70,10 +70,19 @@
 		</g>
 	</svg>
 	<div class="glow" aria-hidden="true"></div>
+	<div class="glow glow-2" aria-hidden="true"></div>
 
 	<div class="container inner">
 		<div class="copy">
-			{#if section.eyebrow}<span class="eyebrow">{section.eyebrow}</span>{/if}
+			{#if section.badge}
+				<a class="badge" href={section.badge.href}>
+					{#if section.badge.tag}<span class="badge-tag">{section.badge.tag}</span>{/if}
+					<span>{section.badge.label}</span>
+					<Icon name="arrow" size={14} />
+				</a>
+			{:else if section.eyebrow}
+				<span class="eyebrow">{section.eyebrow}</span>
+			{/if}
 			<h1>
 				{#each lines as line, i (i)}
 					<span
@@ -87,7 +96,16 @@
 			{#if section.actions?.length}
 				<div class="actions">
 					{#each section.actions as a, i (a.href)}
-						<a class="btn" class:btn-primary={i === 0} href={a.href}>
+						{@const external = a.href.startsWith('http')}
+						<a
+							class="btn"
+							class:btn-primary={i === 0}
+							class:btn-ghost={i > 0}
+							href={a.href}
+							target={external ? '_blank' : undefined}
+							rel={external ? 'noopener noreferrer' : undefined}
+						>
+							{#if a.icon}<Icon name={a.icon} size={18} />{/if}
 							{a.label}
 							{#if i === 0}<Icon name="arrow" size={18} />{/if}
 						</a>
@@ -185,6 +203,63 @@
 		border-radius: 50%;
 		background: radial-gradient(closest-side, var(--accent-soft), transparent);
 		filter: blur(20px);
+		animation: drift 18s ease-in-out infinite alternate;
+	}
+	.glow-2 {
+		width: 560px;
+		height: 560px;
+		right: auto;
+		top: auto;
+		left: -220px;
+		bottom: -240px;
+		opacity: 0.7;
+		animation-duration: 23s;
+		animation-direction: alternate-reverse;
+	}
+	@keyframes drift {
+		to {
+			transform: translate(-60px, 50px) scale(1.15);
+		}
+	}
+	/* Announcement pill above the headline. */
+	.badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		padding: 5px 14px 5px 5px;
+		border-radius: 999px;
+		border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+		background: color-mix(in srgb, var(--surface) 70%, transparent);
+		backdrop-filter: blur(8px);
+		color: var(--text-muted);
+		font-size: 0.88rem;
+		font-weight: 500;
+		transition:
+			border-color 0.25s var(--ease),
+			color 0.25s var(--ease),
+			box-shadow 0.25s var(--ease);
+	}
+	.badge:hover {
+		color: var(--text);
+		border-color: var(--accent);
+		box-shadow: var(--glow);
+	}
+	.badge :global(svg) {
+		transition: transform 0.25s var(--ease);
+	}
+	.badge:hover :global(svg) {
+		transform: translateX(3px);
+	}
+	.badge-tag {
+		padding: 2px 10px;
+		border-radius: 999px;
+		background: var(--accent);
+		color: var(--accent-ink);
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
 	}
 	.inner {
 		display: grid;
@@ -203,11 +278,26 @@
 		display: block;
 	}
 	.grad {
-		background: linear-gradient(95deg, var(--accent) 10%, var(--accent-2) 90%);
+		/* A slow highlight sweeps across the gradient line. */
+		background: linear-gradient(
+				100deg,
+				var(--accent) 0%,
+				var(--accent-2) 30%,
+				var(--accent) 50%,
+				var(--accent-2) 80%,
+				var(--accent) 100%
+			)
+			0 0 / 200% 100%;
 		-webkit-background-clip: text;
 		background-clip: text;
 		color: transparent;
 		padding-bottom: 0.08em;
+		animation: shimmer 8s linear infinite;
+	}
+	@keyframes shimmer {
+		to {
+			background-position: -200% 0;
+		}
 	}
 	.lead {
 		margin-top: 26px;

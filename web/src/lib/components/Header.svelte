@@ -41,6 +41,7 @@
 			<a class="shop" href={site.shop.href}>
 				<Icon name={site.shop.icon} size={16} />
 				<span>{site.shop.label}</span>
+				<span class="ping" aria-hidden="true"></span>
 			</a>
 			<ThemeToggle />
 			<button
@@ -112,6 +113,7 @@
 		gap: 8px;
 	}
 	.shop {
+		position: relative;
 		display: inline-flex;
 		align-items: center;
 		gap: 7px;
@@ -132,6 +134,32 @@
 		background: var(--accent);
 		color: var(--accent-ink);
 		box-shadow: var(--glow);
+	}
+	/* "Open" indicator: a dot that keeps sending out a ring. */
+	.ping {
+		position: absolute;
+		top: -2px;
+		right: -2px;
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background: var(--accent);
+		border: 2px solid var(--bg);
+	}
+	.ping::after {
+		content: '';
+		position: absolute;
+		inset: -2px;
+		border-radius: 50%;
+		background: var(--accent);
+		animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+	}
+	@keyframes ping {
+		75%,
+		100% {
+			transform: scale(2.4);
+			opacity: 0;
+		}
 	}
 	.menu {
 		display: none;

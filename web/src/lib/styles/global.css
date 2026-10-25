@@ -116,6 +116,17 @@ body {
 	overflow-x: hidden;
 }
 
+/* Fine film grain over everything — keeps the large dark areas from looking flat. */
+body::after {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: 200;
+	pointer-events: none;
+	opacity: 0.045;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 img,
 svg,
 video {
@@ -262,6 +273,32 @@ p {
 	box-shadow: var(--glow);
 }
 
+/* A light sweep across the primary button on hover. */
+.btn-primary {
+	position: relative;
+	overflow: hidden;
+	isolation: isolate;
+}
+.btn-primary::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.45) 50%, transparent 65%);
+	transform: translateX(-110%);
+	transition: transform 0.7s var(--ease);
+}
+.btn-primary:hover::after {
+	transform: translateX(110%);
+}
+
+/* Translucent "glass" variant for secondary actions over busy backgrounds. */
+.btn-ghost {
+	--btn-bg: color-mix(in srgb, var(--surface-2) 55%, transparent);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+}
+
 /* ── Tags / chips ──────────────────────────────────────────────── */
 .chip {
 	display: inline-flex;
@@ -287,7 +324,10 @@ p {
 /* ── Card ──────────────────────────────────────────────────────── */
 .card {
 	position: relative;
-	background: var(--surface);
+	/* Faint top sheen so cards read as lit from above. */
+	background:
+		linear-gradient(180deg, color-mix(in srgb, var(--surface-2) 70%, transparent), transparent 140px),
+		var(--surface);
 	border: 1px solid var(--border);
 	border-radius: var(--radius-lg);
 	box-shadow: var(--shadow);

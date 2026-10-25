@@ -2,6 +2,7 @@
 	// Simple 24×24 stroke icons. Add a new one by adding a key with its SVG inner markup.
 	const icons: Record<string, string> = {
 		arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+		check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
 		external: '<path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/>',
 		chip: '<rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>',
 		board: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h4v4h6M7 17h3l3-3h4"/><circle cx="7" cy="7" r="1"/><circle cx="17" cy="11" r="1"/><circle cx="17" cy="14" r="1"/><circle cx="7" cy="17" r="1"/>',

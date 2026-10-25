@@ -17,6 +17,9 @@ export interface HeroSection extends SectionBase {
 	type: 'hero';
 	title: string;
 	lead: string;
+	/** Small announcement pill above the headline, e.g. pointing at the shop. */
+	badge?: Link & { tag?: string };
+	/** The first one is the primary button; `http…` links open in a new tab. */
 	actions?: Link[];
 	/** Right-hand visual. Defaults to 'chip'. */
 	visual?: 'chip' | 'terminal' | 'none';
@@ -30,6 +33,15 @@ export interface MarqueeSection extends SectionBase {
 	speed?: number;
 	/** 2 (default) adds a second, reversed row in outline type. */
 	rows?: 1 | 2;
+}
+
+export interface ShopSection extends SectionBase {
+	type: 'shop';
+	lead?: string;
+	/** Short selling points, shown as a checklist. */
+	features?: string[];
+	/** Button label; the link is always `site.shop.href`. */
+	cta?: string;
 }
 
 export interface ServicesSection extends SectionBase {
@@ -74,6 +86,7 @@ export interface MarkdownSection extends SectionBase {
 export type HomeSection =
 	| HeroSection
 	| MarqueeSection
+	| ShopSection
 	| ServicesSection
 	| ProjectsSection
 	| AppsSection

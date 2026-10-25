@@ -5,7 +5,7 @@
 	 * the pointer bends the scanlines and breaks the picture into glitch blocks — the original
 	 * photo is never shown. `src` must have a transparent background (alpha = silhouette).
 	 */
-	let { src, alt, label = 'portrait.bin' }: { src: string; alt: string; label?: string } =
+	let { src, alt, label }: { src: string; alt: string; label?: string } =
 		$props();
 
 	const HEX = '0123456789ABCDEF';
@@ -359,7 +359,7 @@
 		<canvas bind:this={canvas}></canvas>
 	</div>
 	<figcaption>
-		<span>{label}</span>
+		{#if label}<span class="label">{label}</span>{/if}
 		<span class="hint">{touch ? 'tap' : 'hover'} to glitch</span>
 	</figcaption>
 </figure>
@@ -392,7 +392,7 @@
 		letter-spacing: 0.08em;
 		color: var(--text-faint);
 	}
-	figcaption span:first-child::before {
+	.label::before {
 		content: '// ';
 		color: var(--accent);
 	}

@@ -9,6 +9,7 @@ import Markdown from './Markdown.svelte';
 import Marquee from './Marquee.svelte';
 import Projects from './Projects.svelte';
 import Services from './Services.svelte';
+import Shop from './Shop.svelte';
 import Skills from './Skills.svelte';
 
 export interface SectionProps<T extends HomeSection = HomeSection> {
@@ -20,6 +21,7 @@ export interface SectionProps<T extends HomeSection = HomeSection> {
 export const sections: Record<HomeSection['type'], Component<SectionProps<any>>> = {
 	hero: Hero,
 	marquee: Marquee,
+	shop: Shop,
 	services: Services,
 	projects: Projects,
 	apps: Apps,
