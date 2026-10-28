@@ -62,7 +62,7 @@ Images go in `web/static/images/…` and are referenced as `/images/…`.
 
 Every push to `main` builds the image and publishes it as `ghcr.io/mrjsa/mrjsawebsite:latest` (plus a `sha-…` tag; Git tags `v1.2.3` also get `1.2.3`).
 
-**Podman + Caddy (HTTPS) on a fresh server:** see [INSTALL.md](INSTALL.md).
+**Podman + Caddy (HTTPS) on a fresh server:** see [INSTALL.md](INSTALL.md). The shop (`shop.mrjsa.com` + `admin.shop.mrjsa.com`) on the same server: [SHOP-INSTALL.md](SHOP-INSTALL.md).
 
 **One-time server setup (Docker Compose)**
 
