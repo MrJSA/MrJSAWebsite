@@ -2,6 +2,7 @@
 	import Cover from '#lib/components/Cover.svelte';
 	import Icon from '#lib/components/Icon.svelte';
 	import Seo from '#lib/components/Seo.svelte';
+	import { site } from '#lib/config/site.js';
 
 	let { data } = $props();
 	const p = $derived(data.project);
@@ -12,7 +13,22 @@
 	);
 </script>
 
-<Seo title={p.title} description={p.summary} image={p.cover} type="article" />
+<Seo
+	title={p.title}
+	description={p.summary}
+	image={p.cover}
+	type="article"
+	breadcrumbs={[{ name: 'Projects', path: '/projects/' }]}
+	schema={{
+		'@type': 'Article',
+		headline: p.title,
+		description: p.summary,
+		...(p.date && { datePublished: p.date }),
+		...(p.tags?.length && { keywords: p.tags.join(', ') }),
+		author: { '@id': `${site.url}/#founder` },
+		publisher: { '@id': `${site.url}/#organization` }
+	}}
+/>
 
 <article class="section">
 	<div class="container">

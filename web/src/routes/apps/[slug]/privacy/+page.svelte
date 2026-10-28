@@ -7,7 +7,14 @@
 	const email = $derived(data.supportEmail ?? site.legalEmail);
 </script>
 
-<Seo title="Privacy policy — {data.title}" description="Privacy policy for the {data.title} app." />
+<Seo
+	title="Privacy policy — {data.title}"
+	description="Privacy policy for the {data.title} app."
+	breadcrumbs={[
+		{ name: 'Apps', path: '/apps/' },
+		{ name: data.title, path: `/apps/${data.slug}/` }
+	]}
+/>
 
 <section class="section">
 	<div class="container">

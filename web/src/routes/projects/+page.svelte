@@ -14,7 +14,10 @@
 	);
 </script>
 
-<Seo title="Projects" description="Hardware, firmware and software projects." />
+<Seo
+	title="Projects"
+	description="PCB designs, embedded firmware, apps and web services by MrJSA Technologies — hardware and software projects engineered end to end."
+/>
 
 <section class="section">
 	<div class="container">

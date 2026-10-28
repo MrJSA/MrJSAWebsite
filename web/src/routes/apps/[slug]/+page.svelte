@@ -1,13 +1,27 @@
 <script lang="ts">
 	import Icon from '#lib/components/Icon.svelte';
 	import Seo from '#lib/components/Seo.svelte';
+	import { site } from '#lib/config/site.js';
 	import StoreButtons from '#lib/components/StoreButtons.svelte';
 
 	let { data } = $props();
 	const app = $derived(data.app);
 </script>
 
-<Seo title={app.title} description={app.summary} image={app.cover ?? app.icon} />
+<Seo
+	title={app.title}
+	description={app.summary}
+	image={app.cover ?? app.icon}
+	breadcrumbs={[{ name: 'Apps', path: '/apps/' }]}
+	schema={{
+		'@type': 'SoftwareApplication',
+		name: app.title,
+		description: app.summary,
+		...(app.platforms?.length && { operatingSystem: app.platforms.join(', ') }),
+		author: { '@id': `${site.url}/#founder` },
+		publisher: { '@id': `${site.url}/#organization` }
+	}}
+/>
 
 <section class="section">
 	<div class="container">

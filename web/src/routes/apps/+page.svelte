@@ -6,7 +6,10 @@
 	let { data } = $props();
 </script>
 
-<Seo title="Apps" description="Apps for Android, iOS and the web." />
+<Seo
+	title="Apps"
+	description="Apps for Android, iOS and the web by MrJSA Technologies — designed, built and published in-house, from first idea to store release."
+/>
 
 <section class="section">
 	<div class="container">

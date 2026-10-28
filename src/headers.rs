@@ -1,8 +1,9 @@
-//! Cache and security headers added to every response.
+//! Cache and security headers added to every response, plus permanent
+//! trailing-slash redirects.
 
 use axum::{
     extract::Request,
-    http::{HeaderMap, HeaderName, HeaderValue, header},
+    http::{HeaderMap, HeaderName, HeaderValue, StatusCode, header},
     middleware::Next,
     response::Response,
 };
@@ -28,6 +29,7 @@ const SECURITY_HEADERS: &[(&str, &str)] = &[
 pub async fn apply(req: Request, next: Next) -> Response {
     let cache = cache_policy(req.uri().path());
     let mut res = next.run(req).await;
+    *res.status_mut() = permanent(res.status());
     let status = res.status();
     let headers = res.headers_mut();
 
@@ -63,6 +65,16 @@ fn cache_policy(path: &str) -> &'static str {
     }
 }
 
+/// `ServeDir` answers `/projects` with a temporary 307 to `/projects/`. The move is
+/// permanent, and search engines only transfer ranking for permanent redirects.
+fn permanent(status: StatusCode) -> StatusCode {
+    if status == StatusCode::TEMPORARY_REDIRECT {
+        StatusCode::PERMANENT_REDIRECT
+    } else {
+        status
+    }
+}
+
 fn set(headers: &mut HeaderMap, name: HeaderName, value: &'static str) {
     headers
         .entry(name)
@@ -82,5 +94,15 @@ mod tests {
         assert_eq!(cache_policy("/"), REVALIDATE);
         assert_eq!(cache_policy("/projects/foo/"), REVALIDATE);
         assert_eq!(cache_policy("/_app/version.json"), REVALIDATE);
+    }
+
+    #[test]
+    fn directory_redirects_are_permanent() {
+        assert_eq!(
+            permanent(StatusCode::TEMPORARY_REDIRECT),
+            StatusCode::PERMANENT_REDIRECT
+        );
+        assert_eq!(permanent(StatusCode::OK), StatusCode::OK);
+        assert_eq!(permanent(StatusCode::NOT_FOUND), StatusCode::NOT_FOUND);
     }
 }

@@ -19,6 +19,13 @@ export const site = {
 	email: 'joshua@mrjsa.com',
 	/** Address for legal matters (imprint, privacy policies); fallback contact for app privacy pages. */
 	legalEmail: 'admin@mrjsa.com',
+	/** Business address (same as in the imprint). Tells search engines where the company is based. */
+	address: {
+		street: 'Lessingstraße 2 D',
+		postalCode: '42499',
+		city: 'Hückeswagen',
+		country: 'DE'
+	},
 	lang: 'en',
 	title: 'MrJSA Technologies — PCB Design, Embedded & Software',
 	description:
