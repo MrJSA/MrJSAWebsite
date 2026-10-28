@@ -20,7 +20,7 @@ The controller within the meaning of the General Data Protection Regulation (GDP
 
 Joshua Schulz-Andres — MrJSA Technologies<br>
 Lessingstraße 2 D, 42499 Hückeswagen, Germany<br>
-E-mail: shop@mrjsa.com
+E-mail: admin@mrjsa.com
 
 We are not required to appoint a data protection officer.
 

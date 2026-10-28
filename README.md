@@ -54,7 +54,7 @@ Images go in `web/static/images/…` and are referenced as `/images/…`.
 
 ## Before going live
 
-- [ ] `web/src/lib/config/site.ts` → final `email` (currently shop@mrjsa.com) and `url` if the site moves to a subdomain
+- [ ] `web/src/lib/config/site.ts` → `url` if the site moves to a subdomain
 - [ ] `web/content/pages/privacy.md` → describe reverse proxy logging (does it store IPs? how long?)
 - [ ] Conclude the data processing agreements (AVV) the privacy policy mentions: netcup (Customer Control Panel) and IONOS (customer area)
 - [ ] Reverse proxy: serve HTTPS only (redirect HTTP), and either disable access logs or rotate them (e.g. 7 days) — whatever the privacy policy says

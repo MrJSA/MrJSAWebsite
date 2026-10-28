@@ -15,8 +15,10 @@ export const site = {
 	owner: 'Joshua Schulz-Andres',
 	/** Public URL without trailing slash. Used for canonical links, Open Graph and the sitemap. */
 	url: 'https://mrjsa.com', // TODO: change if the site moves to a subdomain
-	/** Shown publicly; also the fallback contact for app privacy pages. */
-	email: 'shop@mrjsa.com', // TODO: switch to the final address
+	/** Contact address shown in the contact section and footer. */
+	email: 'joshua@mrjsa.com',
+	/** Address for legal matters (imprint, privacy policies); fallback contact for app privacy pages. */
+	legalEmail: 'admin@mrjsa.com',
 	lang: 'en',
 	title: 'MrJSA Technologies — PCB Design, Embedded & Software',
 	description:

@@ -50,7 +50,7 @@ export interface App extends EntryBase {
 	screenshots?: string[];
 	/** Rendered `privacy.md` next to the app's `index.md`, if present. */
 	privacyHtml?: string;
-	/** Contact address shown on the app's privacy page; falls back to the site email. */
+	/** Contact address shown on the app's privacy page; falls back to the site legal email. */
 	supportEmail?: string;
 }
 

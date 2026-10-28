@@ -4,7 +4,7 @@
 	import { site } from '#lib/config/site.js';
 
 	let { data } = $props();
-	const email = $derived(data.supportEmail ?? site.email);
+	const email = $derived(data.supportEmail ?? site.legalEmail);
 </script>
 
 <Seo title="Privacy policy — {data.title}" description="Privacy policy for the {data.title} app." />

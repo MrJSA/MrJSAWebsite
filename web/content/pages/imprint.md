@@ -21,7 +21,7 @@ Germany
 
 ## Contact
 
-E-mail: shop@mrjsa.com<br>
+E-mail: admin@mrjsa.com<br>
 Phone: +49 1746 654358
 
 <!-- § 5 (1) No. 2 DDG + ECJ C-298/07: besides e-mail, a second fast and direct way to reach you

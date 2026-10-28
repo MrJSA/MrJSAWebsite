@@ -15,7 +15,7 @@ stores:
   # source: https://github.com/MrJSA/example-app
 # screenshots:
 #   - /images/apps/example-app/screen-1.png
-# supportEmail: support@example.com   # shown on the privacy page, defaults to site email
+# supportEmail: support@example.com   # shown on the privacy page, defaults to site legalEmail
 order: 1
 draft: true
 ---
