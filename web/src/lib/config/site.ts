@@ -64,7 +64,6 @@ export const home: HomeSection[] = [
 		eyebrow: 'MrJSA Technologies',
 		title: 'From schematic\nto shipped app.',
 		lead: 'I design PCBs, write the firmware that runs on them and build the apps and software that talk to them — one engineer, the whole stack.',
-		badge: { tag: 'New', label: 'The MrJSA shop is open', href: '/#shop' },
 		actions: [
 			{ label: 'See my work', href: '/projects/' },
 			{ label: 'Get in touch', href: '/#contact' },

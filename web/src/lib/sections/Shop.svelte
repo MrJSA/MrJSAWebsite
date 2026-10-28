@@ -51,7 +51,7 @@
 					</ul>
 				{/if}
 				<div class="actions">
-					<a class="btn cta" href={site.shop.href}>
+					<a class="btn cta" href={site.shop.href} target="_blank" rel="noopener noreferrer">
 						<Icon name={site.shop.icon} size={18} />
 						{section.cta ?? site.shop.label}
 						<Icon name="arrow" size={18} />

@@ -31,7 +31,7 @@
 					<a href="mailto:{site.email}"><Icon name="mail" size={16} />{site.email}</a>
 				</li>
 				<li>
-					<a href={site.shop.href}><Icon name={site.shop.icon} size={16} />{site.shop.label}</a>
+					<a href={site.shop.href} target="_blank" rel="noopener noreferrer"><Icon name={site.shop.icon} size={16} />{site.shop.label}</a>
 				</li>
 				{#each site.socials as s (s.href)}
 					<li>
