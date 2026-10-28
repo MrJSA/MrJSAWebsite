@@ -6,7 +6,7 @@ order: 2
 ---
 
 <!--
-  TODO: Fill in the [placeholders]. This is not legal advice.
+  This is not legal advice.
   It matches how the site is built: static pages, no cookies, no analytics, no third-party
   requests, self-hosted fonts, a Rust server that does not log IP addresses.
   If you add anything that processes personal data (analytics, embeds, forms), update this page.
@@ -37,7 +37,9 @@ This website is hosted by netcup GmbH, Emmy-Noether-Straße 10, 76131 Karlsruhe,
 To deliver the website, your browser necessarily sends technical data to the server, in particular your **IP address**, the requested page, date and time, and your browser's user agent. This data is required to establish the connection and to display the website.
 
 - **Our web server** does not store IP addresses. For operational purposes it only logs the requested path, the HTTP status code and the response time.
-- **Reverse proxy:** [Describe what your reverse proxy (e.g. Nginx, Caddy, Traefik) stores. Either: "Our reverse proxy does not write access logs." — or: "Our reverse proxy stores access logs including your IP address to detect and defend against attacks. These logs are automatically deleted after [7] days."]
+- **Reverse proxy:** Requests reach our web server through a reverse proxy (Caddy) on the same server, which handles the HTTPS encryption. It does not write access logs. Only if a request cannot be processed due to a technical error does it log an error message, which may contain your IP address, so that we can find and fix the error.
+
+All server logs are automatically deleted after 7 days.
 
 Legal basis: Art. 6 (1) (f) GDPR. Our legitimate interest lies in the secure, stable and reliable delivery of this website.
 

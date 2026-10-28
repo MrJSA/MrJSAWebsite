@@ -6,7 +6,6 @@ order: 1
 ---
 
 <!--
-  TODO: Fill in every [placeholder] before going live.
   An Impressum is mandatory for business websites in Germany (§ 5 DDG) and must be
   reachable from every page (footer link) — this template is not legal advice.
 -->
