@@ -41,7 +41,7 @@
 				{#if section.eyebrow}<span class="eyebrow">{section.eyebrow}</span>{/if}
 				<h2>
 					{#each lines as line, i (i)}
-						<span use:scramble={{ trigger: 'visible', delay: i * 200, speed: 26 }}>{line}</span>
+						<span use:scramble={{ text: line, trigger: 'visible', delay: i * 200, speed: 26 }}>{line}</span>
 					{/each}
 				</h2>
 				{#if section.lead}<p class="lead">{section.lead}</p>{/if}

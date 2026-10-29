@@ -18,7 +18,7 @@
 			<svelte:element
 				this={level === 1 ? 'h1' : 'h2'}
 				class="section-title"
-				use:scramble={{ trigger: 'visible', speed: 26 }}>{title}</svelte:element
+				use:scramble={{ text: title, trigger: 'visible', speed: 26 }}>{title}</svelte:element
 			>
 		{/if}
 	</div>

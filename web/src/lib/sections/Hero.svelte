@@ -90,7 +90,7 @@
 					<span
 						class:grad={i === lines.length - 1}
 						data-scramble
-						use:scramble={{ delay: 150 + i * 280, speed: 34 }}>{line}</span
+						use:scramble={{ text: line, delay: 150 + i * 280, speed: 34 }}>{line}</span
 					>
 				{/each}
 			</h1>
