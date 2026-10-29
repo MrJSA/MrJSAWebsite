@@ -25,7 +25,6 @@ with as little as possible running on the server.
 ## How it works
 
 - Content lives in plain Markdown files. A new project is a new file, hiding one is a single line.
-  The German translation sits right next to it as `.de.md`.
 - **SvelteKit** renders every page to static HTML at build time, so the server never generates anything
   on request.
 - A small **Rust** server (axum) — under 300 lines — serves the files with precompressed Brotli/Gzip,
@@ -35,6 +34,19 @@ with as little as possible running on the server.
 - **GitHub Actions** checks and builds a new image on every push, and the server pulls it with a single
   command. If the new version doesn't start, it rolls back automatically.
 - **Caddy** sits in front for automatic HTTPS, on the same server as my [RustCraft](/projects/rustcraft/) shop.
+
+## Two languages, no library
+
+The site is available in English and German, and the translation is built in-house instead of using an i18n
+package — for a small, fully static site that is a few helper functions, not a dependency.
+
+- English lives at `/…`, German under `/de/…`. Both are prerendered, so every language is just more static HTML.
+- A German page is a Markdown file next to the English one (`.de.md`). If there is no translation yet, the
+  English version is shown instead.
+- The interface labels — buttons, menus, footer — sit in one typed object per language, so a missing
+  translation is a type error, not a blank spot on the page.
+- Browsers set to German get the German pages automatically. The switch in the header links to the same page
+  in the other language and remembers your choice.
 
 ## Privacy by design
 

@@ -20,7 +20,7 @@ habe ich sie so gebaut wie den Rest meiner Software: in Rust, mit so wenig wie m
 ## Wie sie funktioniert
 
 - Inhalte liegen in einfachen Markdown-Dateien. Ein neues Projekt ist eine neue Datei, eines auszublenden
-  eine einzige Zeile. Übersetzungen liegen als `.de.md` direkt daneben.
+  eine einzige Zeile.
 - **SvelteKit** rendert beim Build jede Seite zu statischem HTML, der Server erzeugt also nie etwas
   auf Anfrage.
 - Ein kleiner **Rust**-Server (axum) — unter 300 Zeilen — liefert die Dateien vorkomprimiert mit Brotli/Gzip aus,
@@ -32,6 +32,20 @@ habe ich sie so gebaut wie den Rest meiner Software: in Rust, mit so wenig wie m
   Befehl. Startet die neue Version nicht, wird automatisch zurückgerollt.
 - Davor sitzt **Caddy** für automatisches HTTPS, auf demselben Server wie mein Shop
   [RustCraft](/de/projects/rustcraft/).
+
+## Zwei Sprachen, keine Bibliothek
+
+Die Seite gibt es auf Englisch und Deutsch, und die Übersetzung ist selbst gebaut statt mit einem i18n-Paket —
+für eine kleine, komplett statische Seite sind das ein paar Hilfsfunktionen, keine Abhängigkeit.
+
+- Englisch liegt unter `/…`, Deutsch unter `/de/…`. Beides wird vorab gerendert, jede Sprache ist also einfach
+  mehr statisches HTML.
+- Eine deutsche Seite ist eine Markdown-Datei neben der englischen (`.de.md`). Gibt es noch keine Übersetzung,
+  wird die englische Version angezeigt.
+- Die Texte der Oberfläche — Buttons, Menüs, Footer — stehen in einem typisierten Objekt pro Sprache. Fehlt
+  eine Übersetzung, gibt es einen Typfehler statt einer Lücke auf der Seite.
+- Browser mit deutscher Spracheinstellung bekommen automatisch die deutschen Seiten. Der Umschalter im Header
+  führt zur selben Seite in der anderen Sprache und merkt sich deine Wahl.
 
 ## Datenschutz von Anfang an
 
