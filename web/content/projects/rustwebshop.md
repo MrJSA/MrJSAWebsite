@@ -8,7 +8,7 @@ featured: true
 tags: [Rust, Axum, SQLx, PostgreSQL, SvelteKit, Docker, Stripe, PayPal]
 links:
   - label: Source on GitHub
-    href: https://github.com/MrJSA/rustwebshop
+    href: https://github.com/MrJSA/RustCraft
     icon: github
 ---
 
