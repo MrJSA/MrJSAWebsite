@@ -5,8 +5,11 @@
 	 * the pointer bends the scanlines and breaks the picture into glitch blocks — the original
 	 * photo is never shown. `src` must have a transparent background (alpha = silhouette).
 	 */
+	import { locale } from '#lib/locale.svelte.js';
+
 	let { src, alt, label }: { src: string; alt: string; label?: string } =
 		$props();
+	const { t } = $derived(locale());
 
 	const HEX = '0123456789ABCDEF';
 	const FONT = '"JetBrains Mono Variable", ui-monospace, monospace';
@@ -360,7 +363,7 @@
 	</div>
 	<figcaption>
 		{#if label}<span class="label">{label}</span>{/if}
-		<span class="hint">{touch ? 'tap' : 'hover'} to glitch</span>
+		<span class="hint">{t.glitchHint(touch)}</span>
 	</figcaption>
 </figure>
 

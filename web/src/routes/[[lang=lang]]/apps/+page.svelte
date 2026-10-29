@@ -2,18 +2,17 @@
 	import AppCard from '#lib/components/AppCard.svelte';
 	import SectionHeader from '#lib/components/SectionHeader.svelte';
 	import Seo from '#lib/components/Seo.svelte';
+	import { locale } from '#lib/locale.svelte.js';
 
 	let { data } = $props();
+	const { t } = $derived(locale());
 </script>
 
-<Seo
-	title="Apps"
-	description="Apps for Android, iOS and the web by MrJSA Technologies — designed, built and published in-house, from first idea to store release."
-/>
+<Seo title={t.apps} description={t.appsDescription} />
 
 <section class="section">
 	<div class="container">
-		<SectionHeader eyebrow="Download" title="Apps" level={1} />
+		<SectionHeader eyebrow={t.download} title={t.apps} level={1} />
 		{#if data.apps.length}
 			<div class="grid">
 				{#each data.apps as app, i (app.slug)}
@@ -21,7 +20,7 @@
 				{/each}
 			</div>
 		{:else}
-			<p class="muted">The first apps are on their way — check back soon.</p>
+			<p class="muted">{t.noApps}</p>
 		{/if}
 	</div>
 </section>

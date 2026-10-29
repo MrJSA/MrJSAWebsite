@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { locale } from '#lib/locale.svelte.js';
 	import Icon from './Icon.svelte';
+
+	const { t } = $derived(locale());
 
 	let theme = $state<'light' | 'dark'>('dark');
 
@@ -22,7 +25,7 @@
 	}
 </script>
 
-<button class="toggle" onclick={toggle} aria-label="Switch to {theme === 'dark' ? 'light' : 'dark'} mode">
+<button class="toggle" onclick={toggle} aria-label={theme === 'dark' ? t.toLight : t.toDark}>
 	<Icon name={theme === 'dark' ? 'sun' : 'moon'} size={18} />
 </button>
 

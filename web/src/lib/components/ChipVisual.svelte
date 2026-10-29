@@ -4,6 +4,9 @@
 	 * (proportions taken from the logo) with signal pulses running along the traces;
 	 * the chip body is the original artwork (`/chip.webp`). Tilts towards the pointer.
 	 */
+	import { locale } from '#lib/locale.svelte.js';
+
+	const { t } = $derived(locale());
 	const SIZE = 600;
 	const CHIP = 300; // chip body edge length
 	const C0 = (SIZE - CHIP) / 2; // chip offset
@@ -42,7 +45,7 @@
 <div
 	class="stage"
 	role="img"
-	aria-label="MrJSA Technologies logo: a microchip on a circuit board"
+	aria-label={t.chipLabel}
 	onpointermove={tilt}
 	onpointerleave={() => ((rx = 0), (ry = 0))}
 >

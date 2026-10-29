@@ -3,12 +3,14 @@
 	import Icon from '#lib/components/Icon.svelte';
 	import Seo from '#lib/components/Seo.svelte';
 	import { site } from '#lib/config/site.js';
+	import { locale } from '#lib/locale.svelte.js';
 
 	let { data } = $props();
+	const { t, href } = $derived(locale());
 	const p = $derived(data.project);
 	const date = $derived(
 		p.date
-			? new Date(p.date).toLocaleDateString('en-GB', { year: 'numeric', month: 'long' })
+			? new Date(p.date).toLocaleDateString(t.dateLocale, { year: 'numeric', month: 'long' })
 			: undefined
 	);
 </script>
@@ -18,7 +20,7 @@
 	description={p.summary}
 	image={p.cover}
 	type="article"
-	breadcrumbs={[{ name: 'Projects', path: '/projects/' }]}
+	breadcrumbs={[{ name: t.projects, path: '/projects/' }]}
 	schema={{
 		'@type': 'Article',
 		headline: p.title,
@@ -32,7 +34,7 @@
 
 <article class="section">
 	<div class="container">
-		<a class="back" href="/projects/"><Icon name="back" size={16} /> All projects</a>
+		<a class="back" href={href('/projects/')}><Icon name="back" size={16} /> {t.allProjects}</a>
 
 		<header>
 			<div class="meta">
@@ -66,7 +68,7 @@
 			<div class="prose">{@html p.html}</div>
 			{#if p.tags?.length}
 				<aside>
-					<h2>Tech</h2>
+					<h2>{t.tech}</h2>
 					<ul>
 						{#each p.tags as tag (tag)}<li class="chip">{tag}</li>{/each}
 					</ul>
@@ -75,12 +77,12 @@
 		</div>
 
 		{#if data.prev || data.next}
-			<nav class="pager" aria-label="More projects">
+			<nav class="pager" aria-label={t.moreProjects}>
 				{#if data.prev}
-					<a href="/projects/{data.prev.slug}/"><small>Previous</small>{data.prev.title}</a>
+					<a href={href(`/projects/${data.prev.slug}/`)}><small>{t.previous}</small>{data.prev.title}</a>
 				{:else}<span></span>{/if}
 				{#if data.next}
-					<a class="next" href="/projects/{data.next.slug}/"><small>Next</small>{data.next.title}</a>
+					<a class="next" href={href(`/projects/${data.next.slug}/`)}><small>{t.next}</small>{data.next.title}</a>
 				{/if}
 			</nav>
 		{/if}

@@ -2,8 +2,10 @@
 	import ProjectCard from '#lib/components/ProjectCard.svelte';
 	import SectionHeader from '#lib/components/SectionHeader.svelte';
 	import Seo from '#lib/components/Seo.svelte';
+	import { locale } from '#lib/locale.svelte.js';
 
 	let { data } = $props();
+	const { t } = $derived(locale());
 
 	const categories = $derived([
 		...new Set(data.projects.map((p) => p.category).filter((c): c is string => !!c))
@@ -14,18 +16,15 @@
 	);
 </script>
 
-<Seo
-	title="Projects"
-	description="PCB designs, embedded firmware, apps and web services by MrJSA Technologies — hardware and software projects engineered end to end."
-/>
+<Seo title={t.projects} description={t.projectsDescription} />
 
 <section class="section">
 	<div class="container">
-		<SectionHeader eyebrow="Portfolio" title="Projects" level={1} />
+		<SectionHeader eyebrow={t.portfolio} title={t.projects} level={1} />
 
 		{#if categories.length > 1}
-			<div class="filters" role="group" aria-label="Filter by category">
-				<button class:on={active === null} onclick={() => (active = null)}>All</button>
+			<div class="filters" role="group" aria-label={t.filterCategory}>
+				<button class:on={active === null} onclick={() => (active = null)}>{t.filterAll}</button>
 				{#each categories as c (c)}
 					<button class:on={active === c} onclick={() => (active = c)}>{c}</button>
 				{/each}
@@ -39,7 +38,7 @@
 				{/each}
 			</div>
 		{:else}
-			<p class="muted">Nothing here yet — check back soon.</p>
+			<p class="muted">{t.noProjects}</p>
 		{/if}
 	</div>
 </section>

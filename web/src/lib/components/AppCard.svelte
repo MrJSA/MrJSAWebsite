@@ -1,14 +1,16 @@
 <script lang="ts">
 	import type { App } from '#lib/types.js';
 	import { reveal } from '#lib/actions/reveal.js';
+	import { locale } from '#lib/locale.svelte.js';
 	import Icon from './Icon.svelte';
 	import StoreButtons from './StoreButtons.svelte';
 
 	let { app, delay = 0 }: { app: App; delay?: number } = $props();
+	const { href } = $derived(locale());
 </script>
 
 <article class="card app spotlight" use:reveal={delay}>
-	<a class="top" href="/apps/{app.slug}/">
+	<a class="top" href={href(`/apps/${app.slug}/`)}>
 		<div class="icon">
 			{#if app.icon}
 				<img src={app.icon} alt="" width="64" height="64" loading="lazy" />

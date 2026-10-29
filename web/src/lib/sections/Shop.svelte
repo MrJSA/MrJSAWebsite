@@ -3,11 +3,13 @@
 	import { scramble } from '#lib/actions/scramble.js';
 	import Icon from '#lib/components/Icon.svelte';
 	import { site } from '#lib/config/site.js';
+	import { locale } from '#lib/locale.svelte.js';
 	import type { SectionProps } from './registry';
 	import type { ShopSection } from './types';
 
 	let { section }: SectionProps<ShopSection> = $props();
-	const lines = $derived((section.title ?? site.shop.label).split('\n'));
+	const { lang } = $derived(locale());
+	const lines = $derived((section.title ?? site.text[lang].shop).split('\n'));
 
 	// The logo chip with the same pad proportions as `ChipVisual.svelte`, scaled down.
 	// One side (top) is computed; the other three are the same group rotated.
@@ -53,7 +55,7 @@
 				<div class="actions">
 					<a class="btn cta" href={site.shop.href} target="_blank" rel="noopener noreferrer">
 						<Icon name={site.shop.icon} size={18} />
-						{section.cta ?? site.shop.label}
+						{section.cta ?? site.text[lang].shop}
 						<Icon name="arrow" size={18} />
 					</a>
 				</div>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { StoreLinks } from '#lib/types.js';
+	import { locale } from '#lib/locale.svelte.js';
 	import Icon from './Icon.svelte';
 
 	let { stores, compact = false }: { stores?: StoreLinks; compact?: boolean } = $props();
@@ -11,12 +12,13 @@
 		label: string;
 	}
 
+	const { t } = $derived(locale());
 	const buttons = $derived(
 		[
-			stores?.googlePlay && { href: stores.googlePlay, icon: 'play', small: 'Get it on', label: 'Google Play' },
-			stores?.appStore && { href: stores.appStore, icon: 'phone', small: 'Download on the', label: 'App Store' },
-			stores?.web && { href: stores.web, icon: 'globe', small: 'Open the', label: 'Web app' },
-			stores?.source && { href: stores.source, icon: 'github', small: 'View the', label: 'Source code' }
+			stores?.googlePlay && { href: stores.googlePlay, icon: 'play', small: t.stores.googlePlay, label: 'Google Play' },
+			stores?.appStore && { href: stores.appStore, icon: 'phone', small: t.stores.appStore, label: 'App Store' },
+			stores?.web && { href: stores.web, icon: 'globe', small: t.stores.web, label: t.stores.webLabel },
+			stores?.source && { href: stores.source, icon: 'github', small: t.stores.source, label: t.stores.sourceLabel }
 		].filter((b): b is Button => !!b)
 	);
 </script>

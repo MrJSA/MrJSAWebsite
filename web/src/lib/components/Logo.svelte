@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { site } from '#lib/config/site.js';
+	import { locale } from '#lib/locale.svelte.js';
+
+	const { t, href } = $derived(locale());
 </script>
 
-<a href="/" class="logo" aria-label="{site.name} — home">
+<a href={href('/')} class="logo" aria-label="{site.name} — {t.homeLabel}">
 	<img src="/icon-192.png" alt="" width="38" height="38" />
 	<span class="word">
 		<strong>{site.shortName}</strong>

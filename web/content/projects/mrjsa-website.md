@@ -25,6 +25,7 @@ with as little as possible running on the server.
 ## How it works
 
 - Content lives in plain Markdown files. A new project is a new file, hiding one is a single line.
+  The German translation sits right next to it as `.de.md`.
 - **SvelteKit** renders every page to static HTML at build time, so the server never generates anything
   on request.
 - A small **Rust** server (axum) — under 300 lines — serves the files with precompressed Brotli/Gzip,

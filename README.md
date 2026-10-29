@@ -47,6 +47,8 @@ The "Shop" links point to `https://shop.mrjsa.com` unless `SHOP_URL` (Docker) / 
 | New plain page (e.g. `/about`) | Add `web/content/pages/<slug>.md` (`footer: true` links it in the footer) |
 | Remove something | Delete the file |
 | Hide temporarily | Add `draft: true` to its frontmatter |
+| German translation | Add `<name>.de.md` next to the English file (e.g. `projects/rustcraft.de.md`, `apps/<slug>/privacy.de.md`). Only fields that differ are needed in its frontmatter, plus the translated body; without it the page shows the English text under `/de/…` |
+| Texts in `site.ts` / UI labels | `site.text` and `home` in `site.ts` have one entry per language; component labels are in `web/src/lib/i18n.ts` |
 | Homepage order / sections | Edit `home` in `web/src/lib/config/site.ts` |
 | Colours & fonts | Tokens at the top of `web/src/lib/styles/global.css` |
 
@@ -62,7 +64,7 @@ Images go in `web/static/images/…` and are referenced as `/images/…`.
 
 Every push to `main` builds the image and publishes it as `ghcr.io/mrjsa/mrjsawebsite:latest` (plus a `sha-…` tag; Git tags `v1.2.3` also get `1.2.3`).
 
-**Podman + Caddy (HTTPS) on a fresh server:** see [INSTALL.md](INSTALL.md). The shop (`shop.mrjsa.com` + `admin.shop.mrjsa.com`) on the same server: [SHOP-INSTALL.md](SHOP-INSTALL.md).
+**Podman + Caddy (HTTPS) on a fresh server:** see [INSTALL.md](INSTALL.md). The shop (`shop.mrjsa.com` + `admin.shop.mrjsa.com`) on the same server: [SHOP-INSTALL.md](SHOP-INSTALL.md). A WireGuard VPN on the same server: [WG_INSTALL.md](WG_INSTALL.md).
 
 **One-time server setup (Docker Compose)**
 

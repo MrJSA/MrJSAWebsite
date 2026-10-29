@@ -2,10 +2,12 @@
 	import ChipVisual from '#lib/components/ChipVisual.svelte';
 	import Icon from '#lib/components/Icon.svelte';
 	import { scramble } from '#lib/actions/scramble.js';
+	import { locale } from '#lib/locale.svelte.js';
 	import type { SectionProps } from './registry';
 	import type { HeroSection } from './types';
 
 	let { section }: SectionProps<HeroSection> = $props();
+	const { t, href } = $derived(locale());
 	const lines = $derived(section.title.split('\n'));
 
 	// Cursor position inside the hero — drives the lit-up grid around the pointer.
@@ -75,7 +77,7 @@
 	<div class="container inner">
 		<div class="copy">
 			{#if section.badge}
-				<a class="badge" href={section.badge.href}>
+				<a class="badge" href={href(section.badge.href)}>
 					{#if section.badge.tag}<span class="badge-tag">{section.badge.tag}</span>{/if}
 					<span>{section.badge.label}</span>
 					<Icon name="arrow" size={14} />
@@ -101,7 +103,7 @@
 							class="btn"
 							class:btn-primary={i === 0}
 							class:btn-ghost={i > 0}
-							href={a.href}
+							href={href(a.href)}
 							target={external ? '_blank' : undefined}
 							rel={external ? 'noopener noreferrer' : undefined}
 						>
@@ -117,7 +119,7 @@
 		{#if (section.visual ?? 'chip') === 'chip'}
 			<ChipVisual />
 		{:else if section.visual === 'terminal' && section.terminal?.length}
-			<div class="terminal card" aria-label="Example workflow">
+			<div class="terminal card" aria-label={t.terminalLabel}>
 				<div class="term-bar">
 					<span></span><span></span><span></span>
 					<em>~/workbench</em>

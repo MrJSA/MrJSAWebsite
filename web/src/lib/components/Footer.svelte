@@ -1,37 +1,40 @@
 <script lang="ts">
 	import { site } from '#lib/config/site.js';
+	import { locale } from '#lib/locale.svelte.js';
 	import type { Link } from '#lib/types.js';
 	import Icon from './Icon.svelte';
 	import Logo from './Logo.svelte';
 
 	let { legal = [] }: { legal?: Link[] } = $props();
 	const year = new Date().getFullYear();
+	const { lang, t, href } = $derived(locale());
+	const text = $derived(site.text[lang]);
 </script>
 
 <footer>
 	<div class="container grid">
 		<div class="brand">
 			<Logo />
-			<p class="muted">{site.description}</p>
+			<p class="muted">{text.description}</p>
 		</div>
 
 		<nav aria-label="Footer">
-			<h2>Site</h2>
+			<h2>{t.footerSite}</h2>
 			<ul>
-				{#each site.nav as item (item.href)}
-					<li><a href={item.href}>{item.label}</a></li>
+				{#each text.nav as item (item.href)}
+					<li><a href={href(item.href)}>{item.label}</a></li>
 				{/each}
 			</ul>
 		</nav>
 
 		<div>
-			<h2>Connect</h2>
+			<h2>{t.footerConnect}</h2>
 			<ul>
 				<li>
 					<a href="mailto:{site.email}"><Icon name="mail" size={16} />{site.email}</a>
 				</li>
 				<li>
-					<a href={site.shop.href} target="_blank" rel="noopener noreferrer"><Icon name={site.shop.icon} size={16} />{site.shop.label}</a>
+					<a href={site.shop.href} target="_blank" rel="noopener noreferrer"><Icon name={site.shop.icon} size={16} />{text.shop}</a>
 				</li>
 				{#each site.socials as s (s.href)}
 					<li>

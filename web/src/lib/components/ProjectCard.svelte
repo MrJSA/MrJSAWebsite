@@ -1,13 +1,15 @@
 <script lang="ts">
 	import type { Project } from '#lib/types.js';
 	import { reveal } from '#lib/actions/reveal.js';
+	import { locale } from '#lib/locale.svelte.js';
 	import Cover from './Cover.svelte';
 	import Icon from './Icon.svelte';
 
 	let { project, delay = 0 }: { project: Project; delay?: number } = $props();
+	const { t, href } = $derived(locale());
 </script>
 
-<a class="card project spotlight" href="/projects/{project.slug}/" use:reveal={delay}>
+<a class="card project spotlight" href={href(`/projects/${project.slug}/`)} use:reveal={delay}>
 	<Cover src={project.cover} alt={project.title} seed={project.slug} label={project.category} />
 	<div class="body">
 		<div class="meta">
@@ -21,7 +23,7 @@
 				{#each project.tags.slice(0, 4) as tag (tag)}<li class="chip">{tag}</li>{/each}
 			</ul>
 		{/if}
-		<span class="more">Read more <Icon name="arrow" size={16} /></span>
+		<span class="more">{t.readMore} <Icon name="arrow" size={16} /></span>
 	</div>
 </a>
 

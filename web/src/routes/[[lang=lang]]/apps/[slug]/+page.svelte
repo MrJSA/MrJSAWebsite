@@ -3,16 +3,18 @@
 	import Seo from '#lib/components/Seo.svelte';
 	import { site } from '#lib/config/site.js';
 	import StoreButtons from '#lib/components/StoreButtons.svelte';
+	import { locale } from '#lib/locale.svelte.js';
 
 	let { data } = $props();
 	const app = $derived(data.app);
+	const { t, href } = $derived(locale());
 </script>
 
 <Seo
 	title={app.title}
 	description={app.summary}
 	image={app.cover ?? app.icon}
-	breadcrumbs={[{ name: 'Apps', path: '/apps/' }]}
+	breadcrumbs={[{ name: t.apps, path: '/apps/' }]}
 	schema={{
 		'@type': 'SoftwareApplication',
 		name: app.title,
@@ -25,7 +27,7 @@
 
 <section class="section">
 	<div class="container">
-		<a class="back" href="/apps/"><Icon name="back" size={16} /> All apps</a>
+		<a class="back" href={href('/apps/')}><Icon name="back" size={16} /> {t.allApps}</a>
 
 		<header class="hero card">
 			<div class="icon">
@@ -47,9 +49,9 @@
 		</header>
 
 		{#if app.screenshots?.length}
-			<div class="shots" aria-label="Screenshots">
+			<div class="shots" aria-label={t.screenshots}>
 				{#each app.screenshots as src, i (src)}
-					<img {src} alt="{app.title} screenshot {i + 1}" loading="lazy" decoding="async" />
+					<img {src} alt="{app.title} {t.screenshot} {i + 1}" loading="lazy" decoding="async" />
 				{/each}
 			</div>
 		{/if}
@@ -57,8 +59,8 @@
 		<div class="prose body">{@html app.html}</div>
 
 		{#if data.hasPrivacy}
-			<a class="privacy" href="/apps/{app.slug}/privacy/">
-				<Icon name="shield" size={18} /> Privacy policy for {app.title}
+			<a class="privacy" href={href(`/apps/${app.slug}/privacy/`)}>
+				<Icon name="shield" size={18} /> {t.privacyFor} {app.title}
 			</a>
 		{/if}
 	</div>

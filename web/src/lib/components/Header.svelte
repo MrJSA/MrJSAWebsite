@@ -1,9 +1,15 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { site } from '#lib/config/site.js';
+	import { unlocalize } from '#lib/i18n.js';
+	import { locale } from '#lib/locale.svelte.js';
 	import Icon from './Icon.svelte';
+	import LangSwitch from './LangSwitch.svelte';
 	import Logo from './Logo.svelte';
 	import ThemeToggle from './ThemeToggle.svelte';
+
+	const { lang, t, href } = $derived(locale());
+	const text = $derived(site.text[lang]);
 
 	let open = $state(false);
 	let scrolled = $state(false);
@@ -14,8 +20,9 @@
 		open = false;
 	});
 
-	function isActive(href: string) {
-		return !href.includes('#') && href !== '/' && page.url.pathname.startsWith(href);
+	/** `path` is a nav link without language prefix. */
+	function isActive(path: string) {
+		return !path.includes('#') && path !== '/' && unlocalize(page.url.pathname).startsWith(path);
 	}
 </script>
 
@@ -27,9 +34,9 @@
 
 		<nav aria-label="Main">
 			<ul id="main-nav">
-				{#each site.nav as item (item.href)}
+				{#each text.nav as item (item.href)}
 					<li>
-						<a href={item.href} class:active={isActive(item.href)} onclick={() => (open = false)}
+						<a href={href(item.href)} class:active={isActive(item.href)} onclick={() => (open = false)}
 							>{item.label}</a
 						>
 					</li>
@@ -40,12 +47,13 @@
 		<div class="actions">
 			<a class="shop" href={site.shop.href} target="_blank" rel="noopener noreferrer">
 				<Icon name={site.shop.icon} size={16} />
-				<span>{site.shop.label}</span>
+				<span>{text.shop}</span>
 			</a>
+			<LangSwitch />
 			<ThemeToggle />
 			<button
 				class="menu"
-				aria-label={open ? 'Close menu' : 'Open menu'}
+				aria-label={open ? t.closeMenu : t.openMenu}
 				aria-expanded={open}
 				aria-controls="main-nav"
 				onclick={() => (open = !open)}

@@ -1,14 +1,17 @@
 import { error } from '@sveltejs/kit';
+import { langEntry, langParam, langs } from '#lib/i18n.js';
 import { findOr404, getCollections } from '#lib/server/content.js';
 
 export function entries() {
-	return getCollections()
-		.apps.filter((a) => a.privacyHtml)
-		.map((a) => ({ slug: a.slug }));
+	return langs.flatMap((lang) =>
+		getCollections(lang)
+			.apps.filter((a) => a.privacyHtml)
+			.map((a) => ({ ...langEntry(lang), slug: a.slug }))
+	);
 }
 
 export function load({ params }) {
-	const app = findOr404(getCollections().apps, params.slug);
+	const app = findOr404(getCollections(langParam(params.lang)).apps, params.slug);
 	if (!app.privacyHtml) error(404, 'Not found');
 	return {
 		slug: app.slug,

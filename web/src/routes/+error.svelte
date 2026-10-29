@@ -2,20 +2,23 @@
 	import { page } from '$app/state';
 	import Icon from '#lib/components/Icon.svelte';
 	import Seo from '#lib/components/Seo.svelte';
+	import { locale } from '#lib/locale.svelte.js';
+
+	const { t, href } = $derived(locale());
 </script>
 
-<Seo title={page.status === 404 ? 'Page not found' : 'Error'} noindex />
+<Seo title={page.status === 404 ? t.notFoundTitle : t.errorTitle} noindex />
 
 <section class="section">
 	<div class="container wrap">
 		<span class="code">{page.status}</span>
-		<h1>{page.status === 404 ? 'This trace leads nowhere.' : 'Something went wrong.'}</h1>
+		<h1>{page.status === 404 ? t.notFoundHeading : t.errorHeading}</h1>
 		<p class="muted">
 			{page.status === 404
-				? 'The page you are looking for does not exist or has been moved.'
+				? t.notFoundText
 				: page.error?.message}
 		</p>
-		<a class="btn btn-primary" href="/"><Icon name="back" size={18} /> Back to home</a>
+		<a class="btn btn-primary" href={href('/')}><Icon name="back" size={18} /> {t.backHome}</a>
 	</div>
 </section>
 

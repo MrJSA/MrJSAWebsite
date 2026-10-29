@@ -1,4 +1,5 @@
 import { site } from '#lib/config/site.js';
+import { defaultLang, langs, localize } from '#lib/i18n.js';
 import { getCollections } from '#lib/server/content.js';
 
 export const prerender = true;
@@ -8,7 +9,7 @@ export function GET() {
 	if (site.url.includes('example.com') || site.email.includes('example.com')) {
 		console.warn('\n⚠  site.url / site.email in src/lib/config/site.ts are still placeholders.\n');
 	}
-	const { projects, apps, pages } = getCollections();
+	const { projects, apps, pages } = getCollections(defaultLang);
 	// `lastmod` only where the content has a date — search engines ignore it once it proves unreliable.
 	const entries: { path: string; date?: string }[] = [
 		{ path: '/' },
@@ -21,14 +22,23 @@ export function GET() {
 		]),
 		...pages.map((p) => ({ path: `/${p.slug}/` }))
 	];
+	// Every page exists in every language; each URL lists all its language versions.
 	const urls = entries
-		.map(
-			(e) =>
-				`  <url><loc>${site.url}${e.path}</loc>${e.date ? `<lastmod>${e.date}</lastmod>` : ''}</url>`
+		.flatMap((e) =>
+			langs.map((lang) => {
+				const alternates = [...langs, 'x-default' as const]
+					.map((l) => {
+						const href = site.url + localize(e.path, l === 'x-default' ? defaultLang : l);
+						return `<xhtml:link rel="alternate" hreflang="${l}" href="${href}"/>`;
+					})
+					.join('');
+				const lastmod = e.date ? `<lastmod>${e.date}</lastmod>` : '';
+				return `  <url><loc>${site.url}${localize(e.path, lang)}</loc>${lastmod}${alternates}</url>`;
+			})
 		)
 		.join('\n');
 	const body = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${urls}
 </urlset>
 `;

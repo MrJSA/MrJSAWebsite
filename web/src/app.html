@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="%lang%">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,6 +9,19 @@
 		<link rel="manifest" href="%sveltekit.assets%/manifest.webmanifest" />
 		<meta name="theme-color" content="#050806" />
 		<script>
+			// Language: a saved choice (from the switch in the header) wins; without one, German
+			// browsers get the German pages. Never redirects /de/ → / on the browser language
+			// alone, so search engines (which browse in English) still see the German pages.
+			try {
+				const path = location.pathname;
+				const onDe = path === '/de' || path.startsWith('/de/');
+				const saved = localStorage.getItem('lang');
+				const browserDe = (navigator.languages?.[0] ?? navigator.language ?? '').toLowerCase().startsWith('de');
+				const want = saved === 'de' || saved === 'en' ? saved : browserDe ? 'de' : onDe ? 'de' : 'en';
+				const target =
+					want === 'de' && !onDe ? '/de' + path : want === 'en' && onDe ? path.slice(3) || '/' : null;
+				if (target) location.replace(target + location.search + location.hash);
+			} catch {}
 			// Apply a saved theme before first paint to avoid a flash.
 			document.documentElement.classList.add('js');
 			try {

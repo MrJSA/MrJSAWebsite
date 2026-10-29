@@ -12,7 +12,7 @@ order: 2
   If you add anything that processes personal data (analytics, embeds, forms), update this page.
 -->
 
-_Last updated: 2026-10-24_
+_Last updated: 2026-10-29_
 
 ## 1. Controller
 
@@ -47,11 +47,13 @@ Legal basis: Art. 6 (1) (f) GDPR. Our legitimate interest lies in the secure, st
 
 This website uses TLS (HTTPS) encryption to protect the transmission of data. You can recognise an encrypted connection by "https://" and the lock symbol in your browser's address bar.
 
-## 5. Local storage (theme setting)
+## 5. Local storage (theme and language)
 
-If you switch between light and dark mode, your choice is saved in your browser's local storage under the key `theme`. This value never leaves your device, is not transmitted to us and is not used for tracking. You can delete it at any time via your browser settings.
+If you switch between light and dark mode, or between English and German, your choice is saved in your browser's local storage under the key `theme` or `lang`. These values never leave your device, are not transmitted to us and are not used for tracking. You can delete them at any time via your browser settings.
 
-Storing this setting is strictly necessary to provide the function you explicitly requested, so no consent is required (§ 25 (2) No. 2 TDDDG).
+Storing these settings is strictly necessary to provide the function you explicitly requested, so no consent is required (§ 25 (2) No. 2 TDDDG).
+
+As long as you have not chosen a language, the website checks your browser's preferred language on your device and shows you the German version if it is German. Nothing is stored or transmitted for this.
 
 ## 6. Contact by e-mail
 

@@ -2,28 +2,30 @@
 	import Icon from '#lib/components/Icon.svelte';
 	import Seo from '#lib/components/Seo.svelte';
 	import { site } from '#lib/config/site.js';
+	import { locale } from '#lib/locale.svelte.js';
 
 	let { data } = $props();
 	const email = $derived(data.supportEmail ?? site.legalEmail);
+	const { t, href } = $derived(locale());
 </script>
 
 <Seo
-	title="Privacy policy — {data.title}"
-	description="Privacy policy for the {data.title} app."
+	title="{t.privacyPolicy} — {data.title}"
+	description={t.privacyDescription(data.title)}
 	breadcrumbs={[
-		{ name: 'Apps', path: '/apps/' },
+		{ name: t.apps, path: '/apps/' },
 		{ name: data.title, path: `/apps/${data.slug}/` }
 	]}
 />
 
 <section class="section">
 	<div class="container">
-		<a class="back" href="/apps/{data.slug}/"><Icon name="back" size={16} /> {data.title}</a>
-		<span class="eyebrow">Privacy policy</span>
+		<a class="back" href={href(`/apps/${data.slug}/`)}><Icon name="back" size={16} /> {data.title}</a>
+		<span class="eyebrow">{t.privacyPolicy}</span>
 		<h1>{data.title}</h1>
 		<div class="prose">{@html data.html}</div>
 		<p class="contact muted">
-			Questions about this policy? Contact <a href="mailto:{email}">{email}</a>.
+			{t.privacyQuestions} <a href="mailto:{email}">{email}</a>.
 		</p>
 	</div>
 </section>

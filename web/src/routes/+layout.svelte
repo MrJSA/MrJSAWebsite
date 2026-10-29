@@ -10,8 +10,15 @@
 	import Footer from '#lib/components/Footer.svelte';
 	import Header from '#lib/components/Header.svelte';
 	import ScrollTrace from '#lib/components/ScrollTrace.svelte';
+	import { locale } from '#lib/locale.svelte.js';
 
 	let { data, children } = $props();
+	const { lang, t } = $derived(locale());
+
+	// `app.html` sets it on page load; this keeps it right after switching language in the app.
+	$effect(() => {
+		document.documentElement.lang = lang;
+	});
 
 	// Smooth cross-fade between pages where the browser supports View Transitions.
 	onNavigate((navigation) => {
@@ -39,7 +46,7 @@
 <svelte:document onpointermove={spotlight} />
 
 <DotField />
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">{t.skip}</a>
 <Header />
 <ScrollTrace />
 <main id="main">

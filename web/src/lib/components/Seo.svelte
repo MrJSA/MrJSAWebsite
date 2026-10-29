@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { home, site } from '#lib/config/site.js';
+	import { defaultLang, langs, locales, localize, unlocalize } from '#lib/i18n.js';
+	import { locale } from '#lib/locale.svelte.js';
 
 	type Crumb = { name: string; path: string };
 
 	let {
 		title,
-		description = site.description,
+		description,
 		image = site.ogImage,
 		type = 'website',
 		noindex = false,
@@ -18,29 +20,40 @@
 		image?: string;
 		type?: string;
 		noindex?: boolean;
-		/** Parent pages between Home and this page, e.g. `[{ name: 'Projects', path: '/projects/' }]`. */
+		/** Parent pages between Home and this page, e.g. `[{ name: 'Projects', path: '/projects/' }]` (without language prefix). */
 		breadcrumbs?: Crumb[];
 		/** The page's main thing as schema.org data, e.g. `{ '@type': 'Article', … }`. */
 		schema?: Record<string, unknown>;
 	} = $props();
 
-	const fullTitle = $derived(title ? `${title} · ${site.name}` : site.title);
+	const { lang, t } = $derived(locale());
+	const text = $derived(site.text[lang]);
+	const desc = $derived(description ?? text.description);
+	const fullTitle = $derived(title ? `${title} · ${site.name}` : text.title);
 	const canonical = $derived(site.url + page.url.pathname);
+	// The same page in every language, for `hreflang` (English is also the fallback for all others).
+	const alternates = $derived(
+		langs.map((l) => ({ lang: l, href: site.url + localize(unlocalize(page.url.pathname), l) }))
+	);
 	const imageUrl = $derived(image.startsWith('http') ? image : site.url + image);
-	const isHome = $derived(page.url.pathname === '/');
+	const isHome = $derived(unlocalize(page.url.pathname) === '/');
 
 	// Structured data (schema.org): who runs the site, where the company is based and
 	// where this page sits — search engines use it for rich results and the knowledge panel.
 	const ORG = `${site.url}/#organization`;
 	const PERSON = `${site.url}/#founder`;
 	const WEBSITE = `${site.url}/#website`;
-	const portrait = home.find((s) => s.type === 'about')?.portrait?.src;
+	const portrait = home[defaultLang].find((s) => s.type === 'about')?.portrait?.src;
 	const sameAs = site.socials.map((s) => s.href);
 
 	const jsonLd = $derived.by(() => {
 		const crumbs: Crumb[] = isHome
 			? []
-			: [{ name: 'Home', path: '/' }, ...breadcrumbs, { name: title ?? site.name, path: page.url.pathname }];
+			: [
+					{ name: t.home, path: localize('/', lang) },
+					...breadcrumbs.map((c) => ({ ...c, path: localize(c.path, lang) })),
+					{ name: title ?? site.name, path: page.url.pathname }
+				];
 		const graph: Record<string, unknown>[] = [
 			{
 				'@type': 'Organization',
@@ -49,7 +62,7 @@
 				alternateName: site.shortName,
 				url: `${site.url}/`,
 				logo: { '@type': 'ImageObject', url: `${site.url}/logo-512.png`, width: 512, height: 512 },
-				description: site.description,
+				description: text.description,
 				email: site.email,
 				address: {
 					'@type': 'PostalAddress',
@@ -75,7 +88,7 @@
 				'@id': WEBSITE,
 				url: `${site.url}/`,
 				name: site.name,
-				inLanguage: site.lang,
+				inLanguage: lang,
 				publisher: { '@id': ORG }
 			},
 			{
@@ -83,8 +96,8 @@
 				'@id': canonical,
 				url: canonical,
 				name: fullTitle,
-				description,
-				inLanguage: site.lang,
+				description: desc,
+				inLanguage: lang,
 				isPartOf: { '@id': WEBSITE },
 				primaryImageOfPage: { '@type': 'ImageObject', url: imageUrl },
 				...(crumbs.length && { breadcrumb: { '@id': `${canonical}#breadcrumb` } })
@@ -121,13 +134,20 @@
 
 <svelte:head>
 	<title>{fullTitle}</title>
-	<meta name="description" content={description} />
+	<meta name="description" content={desc} />
 	<link rel="canonical" href={canonical} />
-	{#if noindex}<meta name="robots" content="noindex" />{/if}
+	{#if noindex}
+		<meta name="robots" content="noindex" />
+	{:else}
+		{#each alternates as a (a.lang)}<link rel="alternate" hreflang={a.lang} href={a.href} />{/each}
+		<link rel="alternate" hreflang="x-default" href={alternates[0].href} />
+	{/if}
 	<meta property="og:site_name" content={site.name} />
+	<meta property="og:locale" content={locales[lang]} />
+	{#each langs.filter((l) => l !== lang) as l (l)}<meta property="og:locale:alternate" content={locales[l]} />{/each}
 	<meta property="og:type" content={type} />
 	<meta property="og:title" content={fullTitle} />
-	<meta property="og:description" content={description} />
+	<meta property="og:description" content={desc} />
 	<meta property="og:url" content={canonical} />
 	<meta property="og:image" content={imageUrl} />
 	<meta property="og:image:alt" content={fullTitle} />
