@@ -1,6 +1,6 @@
 <a href="https://mrjsa.com"><img src="portrait.png" alt="Joshua Schulz-Andres" width="220" align="left"></a>
 
-<h1>Hi there, I’m Joshua</h1>
+<h3>Hi there, I’m Joshua</h3>
 
 Engineer from Germany · PCBs, embedded firmware, apps &amp; software
 
