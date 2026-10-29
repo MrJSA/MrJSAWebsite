@@ -13,10 +13,11 @@ Do these in order — each guide builds on [INSTALL.md](INSTALL.md).
 | Guide | What it sets up |
 | --- | --- |
 | **[INSTALL.md](INSTALL.md)** | A fresh Debian 13 / Ubuntu 24.04 server with Podman + Caddy, serving `https://mrjsa.com` |
-| **[SHOP-INSTALL.md](SHOP-INSTALL.md)** | The RustCraft shop on the same server: `shop.mrjsa.com` + `admin.shop.mrjsa.com` |
+| **[SHOP_INSTALL.md](SHOP_INSTALL.md)** | The RustCraft shop on the same server: `shop.mrjsa.com` + `admin.shop.mrjsa.com` |
 | **[WG_INSTALL.md](WG_INSTALL.md)** | A WireGuard VPN container for your laptop and phone |
+| **[VW_INSTALL.md](VW_INSTALL.md)** | A Vaultwarden password manager at `vault.mrjsa.com` |
 
-The shop and the VPN are optional; only [INSTALL.md](INSTALL.md) is needed for the website.
+The shop, the VPN and the password manager are optional; only [INSTALL.md](INSTALL.md) is needed for the website.
 
 ## GitHub profile
 
