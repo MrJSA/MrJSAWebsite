@@ -5,6 +5,7 @@
 Engineer from Germany · PCBs, embedded firmware, apps &amp; software
 
 <a href="https://mrjsa.com"><img alt="Website" src="https://img.shields.io/badge/mrjsa.com-25d43a?style=for-the-badge"></a>
+<a href="https://www.linkedin.com/in/mrjsa"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge"></a>
 
 I enjoy the full journey of a product: from the first sketch of a circuit, through the board layout and the
 firmware, all the way to the app in the store. With **MrJSA Technologies** I build my own products and help

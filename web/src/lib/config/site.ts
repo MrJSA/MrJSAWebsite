@@ -44,8 +44,8 @@ export const site = {
 	},
 
 	socials: [
-		{ label: 'GitHub', href: 'https://github.com/MrJSA', icon: 'github' }
-		// { label: 'LinkedIn', href: 'https://linkedin.com/in/…', icon: 'linkedin' },
+		{ label: 'GitHub', href: 'https://github.com/MrJSA', icon: 'github' },
+		{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/mrjsa', icon: 'linkedin' }
 	] satisfies Link[],
 
 	/** Text per language. Internal links are written without the language prefix — it's added automatically. */
