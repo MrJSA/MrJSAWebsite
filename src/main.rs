@@ -21,7 +21,7 @@ use axum::{
     Router,
     extract::Request,
     middleware::{self, Next},
-    response::Response,
+    response::{Redirect, Response},
     routing::get,
 };
 use tower_http::services::{ServeDir, ServeFile};
@@ -29,6 +29,10 @@ use tracing::info;
 use tracing_subscriber::EnvFilter;
 
 use crate::config::Config;
+
+/// Renamed pages, answered with a permanent redirect so old links and search
+/// ranking carry over. Never remove an entry — the old URL may be linked anywhere.
+const MOVED: &[(&str, &str)] = &[("/projects/rustwebshop/", "/projects/rustcraft/")];
 
 #[tokio::main]
 async fn main() {
@@ -59,8 +63,14 @@ async fn main() {
         .precompressed_gzip()
         .not_found_service(not_found);
 
-    let app = Router::new()
-        .route("/healthz", get(|| async { "ok" }))
+    let mut app = Router::new().route("/healthz", get(|| async { "ok" }));
+    for &(from, to) in MOVED {
+        let redirect = get(move || async move { Redirect::permanent(to) });
+        app = app
+            .route(from, redirect.clone())
+            .route(from.trim_end_matches('/'), redirect);
+    }
+    let app = app
         .fallback_service(static_files)
         .layer(middleware::from_fn(headers::apply))
         .layer(middleware::from_fn(log_request));

@@ -17,10 +17,25 @@ links:
 I wanted a home on the web that is **quick to load**, **easy to extend** and that I fully control — no
 page builders, no trackers, no database.
 
+And I didn't want any PHP. No WordPress, no plugins that need weekly security updates, no admin login waiting
+to be brute-forced. Most of the web still runs on that stack, and for a site that changes a few times a month
+it is far more moving parts than necessary. So I built it the way I build the rest of my software: in Rust,
+with as little as possible running on the server.
+
 ## How it works
 
-- Content lives in plain Markdown files. A new project is a new file.
-- **SvelteKit** renders every page to static HTML at build time.
-- A small **Rust** server (axum) serves the files with Brotli/Gzip compression,
-  long-term caching and security headers.
-- **GitHub Actions** builds a Docker image on every push, and the server pulls the new version with a single command.
+- Content lives in plain Markdown files. A new project is a new file, hiding one is a single line.
+- **SvelteKit** renders every page to static HTML at build time, so the server never generates anything
+  on request.
+- A small **Rust** server (axum) — under 300 lines — serves the files with precompressed Brotli/Gzip,
+  long-term caching for assets and security headers on every response.
+- The Docker image contains nothing but that server and the built files: no shell, no package manager,
+  no interpreter, and it runs as an unprivileged user with a read-only file system.
+- **GitHub Actions** checks and builds a new image on every push, and the server pulls it with a single
+  command. If the new version doesn't start, it rolls back automatically.
+- **Caddy** sits in front for automatic HTTPS, on the same server as my [RustCraft](/projects/rustcraft/) shop.
+
+## Privacy by design
+
+No cookies, no analytics, no ads and no third-party requests — fonts, images and scripts all come from my own
+server. That also means there is no cookie banner, because there is nothing to consent to.
