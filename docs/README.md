@@ -20,7 +20,7 @@ The shop and the VPN are optional; only [INSTALL.md](INSTALL.md) is needed for t
 
 ## GitHub profile
 
-- **[mrjsa/](mrjsa/)** — the README for the [github.com/MrJSA](https://github.com/MrJSA) profile, with the green portrait. Copy both files into the `MrJSA/MrJSA` repository.
+- **[mrjsa/](mrjsa/)** — the README for the [github.com/MrJSA](https://github.com/MrJSA) profile, with the green portrait. Copy the folder's contents (including `.github/`) into the `MrJSA/MrJSA` repository once; after that its workflow pulls `README.md` and `portrait.png` from here every day.
 
 ---
 

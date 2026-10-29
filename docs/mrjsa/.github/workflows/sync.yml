@@ -1,0 +1,32 @@
+# Lives in the MrJSA/MrJSA profile repository. Pulls README.md and portrait.png from
+# docs/mrjsa/ in MrJSA/MrJSAWebsite once a day and commits them if they changed.
+name: Sync profile README
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch from MrJSAWebsite
+        run: |
+          base=https://raw.githubusercontent.com/MrJSA/MrJSAWebsite/main/docs/mrjsa
+          curl -fsSL "$base/README.md" -o README.md
+          curl -fsSL "$base/portrait.png" -o portrait.png
+
+      - name: Commit if changed
+        run: |
+          git add README.md portrait.png
+          git diff --cached --quiet && exit 0
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Sync profile README from MrJSAWebsite'
+          git push
