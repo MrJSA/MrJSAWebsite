@@ -18,6 +18,10 @@ Do these in order — each guide builds on [INSTALL.md](INSTALL.md).
 
 The shop and the VPN are optional; only [INSTALL.md](INSTALL.md) is needed for the website.
 
+## GitHub profile
+
+- **[mrjsa/](mrjsa/)** — the README for the [github.com/MrJSA](https://github.com/MrJSA) profile, with the green portrait. Copy both files into the `MrJSA/MrJSA` repository.
+
 ---
 
 Back to the [main README](../README.md).
