@@ -139,6 +139,9 @@
 	{#if noindex}
 		<meta name="robots" content="noindex" />
 	{:else}
+		<!-- Lets Google show large image previews and full snippets in search results. -->
+		<meta name="robots" content="max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
 		{#each alternates as a (a.lang)}<link rel="alternate" hreflang={a.lang} href={a.href} />{/each}
 		<link rel="alternate" hreflang="x-default" href={alternates[0].href} />
 	{/if}
