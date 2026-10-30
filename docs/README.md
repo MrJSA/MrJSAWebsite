@@ -5,6 +5,7 @@ Guides for working on the website and for running it on the server.
 ## Development
 
 - **[DEVELOPMENT.md](DEVELOPMENT.md)** — how the repository is organised, how to run it locally, how to change content and how the image gets to the server.
+- **[SEO-UPDATE.md](SEO-UPDATE.md)** — what is set up for search engines, the latest SEO change and what is still left to do (cover images, Search Console checks).
 
 ## GitHub profile
 
