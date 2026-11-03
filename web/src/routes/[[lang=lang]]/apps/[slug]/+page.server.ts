@@ -8,6 +8,14 @@ export function entries() {
 }
 
 export function load({ params }) {
-	const app = findOr404(getCollections(langParam(params.lang)).apps, params.slug);
-	return { app: { ...app, privacyHtml: undefined }, hasPrivacy: !!app.privacyHtml };
+	const { apps } = getCollections(langParam(params.lang));
+	const app = findOr404(apps, params.slug);
+	const index = apps.indexOf(app);
+	const neighbour = (i: number) => (apps[i] ? { slug: apps[i].slug, title: apps[i].title } : undefined);
+	return {
+		app: { ...app, privacyHtml: undefined },
+		hasPrivacy: !!app.privacyHtml,
+		prev: neighbour(index - 1),
+		next: neighbour(index + 1)
+	};
 }

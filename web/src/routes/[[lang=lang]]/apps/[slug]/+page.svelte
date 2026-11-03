@@ -25,27 +25,27 @@
 	}}
 />
 
-<section class="section">
+<article class="section">
 	<div class="container">
 		<a class="back" href={href('/apps/')}><Icon name="back" size={16} /> {t.allApps}</a>
 
-		<header class="hero card">
-			<div class="icon">
-				{#if app.icon}
-					<img src={app.icon} alt="" width="120" height="120" />
-				{:else}
-					<Icon name="phone" size={48} />
-				{/if}
+		<header>
+			<div class="meta">
+				{#if app.status}<span class="chip chip-accent">{app.status}</span>{/if}
+				{#each app.platforms ?? [] as p (p)}<span class="chip">{p}</span>{/each}
 			</div>
-			<div class="text">
-				<div class="meta">
-					{#if app.status}<span class="chip chip-accent">{app.status}</span>{/if}
-					{#each app.platforms ?? [] as p (p)}<span class="chip">{p}</span>{/each}
+			<div class="title">
+				<div class="icon">
+					{#if app.icon}
+						<img src={app.icon} alt="" width="88" height="88" />
+					{:else}
+						<Icon name="phone" size={36} />
+					{/if}
 				</div>
 				<h1>{app.title}</h1>
-				<p class="muted">{app.summary}</p>
-				<StoreButtons stores={app.stores} />
 			</div>
+			<p class="lead muted">{app.summary}</p>
+			<div class="links"><StoreButtons stores={app.stores} /></div>
 		</header>
 
 		{#if app.screenshots?.length}
@@ -54,17 +54,40 @@
 					<img {src} alt="{app.title} {t.screenshot} {i + 1}" loading="lazy" decoding="async" />
 				{/each}
 			</div>
+		{:else}
+			<hr class="rule" />
 		{/if}
 
-		<div class="prose body">{@html app.html}</div>
+		<div class="layout">
+			<div class="prose">{@html app.html}</div>
+			{#if app.tags?.length}
+				<aside>
+					<h2>{t.tech}</h2>
+					<ul>
+						{#each app.tags as tag (tag)}<li class="chip">{tag}</li>{/each}
+					</ul>
+				</aside>
+			{/if}
+		</div>
 
 		{#if data.hasPrivacy}
 			<a class="privacy" href={href(`/apps/${app.slug}/privacy/`)}>
 				<Icon name="shield" size={18} /> {t.privacyFor} {app.title}
 			</a>
 		{/if}
+
+		{#if data.prev || data.next}
+			<nav class="pager" aria-label={t.apps}>
+				{#if data.prev}
+					<a href={href(`/apps/${data.prev.slug}/`)}><small>{t.previous}</small>{data.prev.title}</a>
+				{:else}<span></span>{/if}
+				{#if data.next}
+					<a class="next" href={href(`/apps/${data.next.slug}/`)}><small>{t.next}</small>{data.next.title}</a>
+				{/if}
+			</nav>
+		{/if}
 	</div>
-</section>
+</article>
 
 <style>
 	.back {
@@ -77,52 +100,55 @@
 	.back:hover {
 		color: var(--accent);
 	}
-	.hero {
-		display: flex;
-		gap: clamp(20px, 4vw, 40px);
-		align-items: center;
+	header {
 		margin-top: 28px;
-		padding: clamp(24px, 5vw, 48px);
-		background:
-			radial-gradient(500px 260px at 0% 0%, var(--accent-soft), transparent 70%),
-			var(--surface);
-	}
-	.icon {
-		display: grid;
-		place-items: center;
-		width: clamp(88px, 14vw, 120px);
-		aspect-ratio: 1;
-		flex: none;
-		border-radius: 26%;
-		background: var(--accent-soft);
-		color: var(--accent);
-		overflow: hidden;
-		border: 1px solid var(--border);
-		box-shadow: var(--shadow);
-	}
-	.text {
-		display: grid;
-		gap: 14px;
-		justify-items: start;
+		max-width: 820px;
 	}
 	.meta {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 6px;
 	}
-	h1 {
-		font-size: clamp(2rem, 5vw, 3.2rem);
+	.title {
+		display: flex;
+		align-items: center;
+		gap: clamp(16px, 3vw, 24px);
+		margin-top: 18px;
 	}
-	.text p {
-		font-size: 1.1rem;
-		max-width: 60ch;
-		margin-bottom: 8px;
+	.icon {
+		display: grid;
+		place-items: center;
+		width: clamp(64px, 10vw, 88px);
+		aspect-ratio: 1;
+		flex: none;
+		border-radius: 24%;
+		background: var(--accent-soft);
+		color: var(--accent);
+		overflow: hidden;
+		border: 1px solid var(--border);
+		box-shadow: var(--shadow);
+	}
+	.icon img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	h1 {
+		font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+		letter-spacing: -0.03em;
+	}
+	.lead {
+		margin-top: 18px;
+		font-size: 1.2rem;
+	}
+	.links {
+		margin-top: 28px;
 	}
 	.shots {
 		display: flex;
 		gap: 16px;
 		overflow-x: auto;
-		margin-top: 40px;
+		margin-top: 48px;
 		padding-bottom: 8px;
 		scroll-snap-type: x mandatory;
 	}
@@ -134,8 +160,39 @@
 		border: 1px solid var(--border);
 		scroll-snap-align: start;
 	}
-	.body {
-		margin-top: 48px;
+	.rule {
+		margin: 56px 0 0;
+		height: 1px;
+		border: 0;
+		background: linear-gradient(90deg, var(--accent), var(--border) 30%, transparent);
+	}
+	.layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 240px;
+		gap: 56px;
+		margin-top: 56px;
+	}
+	.layout:not(:has(aside)) {
+		grid-template-columns: minmax(0, 1fr);
+	}
+	aside h2 {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		color: var(--text-faint);
+		margin-bottom: 14px;
+	}
+	aside ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		position: sticky;
+		top: calc(var(--header-h) + 24px);
 	}
 	.privacy {
 		display: inline-flex;
@@ -147,11 +204,45 @@
 	.privacy:hover {
 		color: var(--accent);
 	}
-	@media (max-width: 640px) {
-		.hero {
-			flex-direction: column;
-			align-items: flex-start;
+	.pager {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 16px;
+		margin-top: 80px;
+		padding-top: 32px;
+		border-top: 1px solid var(--border);
+	}
+	.pager a {
+		display: grid;
+		gap: 4px;
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: 1.1rem;
+	}
+	.pager a:hover {
+		color: var(--accent);
+	}
+	.pager small {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		color: var(--text-faint);
+		font-weight: 400;
+	}
+	.pager .next {
+		text-align: right;
+	}
+	@media (max-width: 860px) {
+		.layout {
+			grid-template-columns: 1fr;
+			gap: 32px;
 		}
+		aside {
+			order: -1;
+		}
+	}
+	@media (max-width: 640px) {
 		.shots img {
 			height: 360px;
 		}
