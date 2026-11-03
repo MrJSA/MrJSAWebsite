@@ -22,6 +22,8 @@
 		moon: '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
 		menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
 		close: '<path d="M6 6l12 12M18 6L6 18"/>',
+		chevronLeft: '<path d="M15 5l-7 7 7 7"/>',
+		chevronRight: '<path d="M9 5l7 7-7 7"/>',
 		back: '<path d="M19 12H5M11 18l-6-6 6-6"/>',
 		user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
 		layers: '<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',
