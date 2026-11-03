@@ -49,10 +49,12 @@
 		</header>
 
 		{#if app.screenshots?.length}
-			<div class="shots" aria-label={t.screenshots}>
-				{#each app.screenshots as src, i (src)}
-					<img {src} alt="{app.title} {t.screenshot} {i + 1}" loading="lazy" decoding="async" />
-				{/each}
+			<div class="gallery card">
+				<div class="shots" aria-label={t.screenshots}>
+					{#each app.screenshots as src, i (src)}
+						<img {src} alt="{app.title} {t.screenshot} {i + 1}" loading="lazy" decoding="async" />
+					{/each}
+				</div>
 			</div>
 		{:else}
 			<hr class="rule" />
@@ -60,12 +62,20 @@
 
 		<div class="layout">
 			<div class="prose">{@html app.html}</div>
-			{#if app.tags?.length}
+			{#if app.platforms?.length || app.tags?.length}
 				<aside>
-					<h2>{t.tech}</h2>
-					<ul>
-						{#each app.tags as tag (tag)}<li class="chip">{tag}</li>{/each}
-					</ul>
+					{#if app.platforms?.length}
+						<h2>{t.platforms}</h2>
+						<ul>
+							{#each app.platforms as p (p)}<li class="chip">{p}</li>{/each}
+						</ul>
+					{/if}
+					{#if app.tags?.length}
+						<h2>{t.tech}</h2>
+						<ul>
+							{#each app.tags as tag (tag)}<li class="chip">{tag}</li>{/each}
+						</ul>
+					{/if}
 				</aside>
 			{/if}
 		</div>
@@ -144,16 +154,25 @@
 	.links {
 		margin-top: 28px;
 	}
+	.gallery {
+		margin-top: 48px;
+		overflow: hidden;
+		background:
+			radial-gradient(circle, var(--border-strong) 1px, transparent 1.2px) 0 0 / 16px 16px,
+			radial-gradient(60% 80% at 50% 50%, var(--accent-soft), transparent 70%),
+			linear-gradient(140deg, var(--surface-2), var(--bg-elev));
+	}
 	.shots {
 		display: flex;
-		gap: 16px;
+		gap: 20px;
 		overflow-x: auto;
-		margin-top: 48px;
-		padding-bottom: 8px;
+		padding: clamp(20px, 4vw, 36px);
 		scroll-snap-type: x mandatory;
+		scroll-padding: clamp(20px, 4vw, 36px);
 	}
 	.shots img {
-		height: 460px;
+		height: 440px;
+		box-shadow: var(--shadow);
 		width: auto;
 		max-width: none;
 		border-radius: 20px;
@@ -172,9 +191,6 @@
 		gap: 56px;
 		margin-top: 56px;
 	}
-	.layout:not(:has(aside)) {
-		grid-template-columns: minmax(0, 1fr);
-	}
 	aside h2 {
 		font-family: var(--font-mono);
 		font-size: 0.75rem;
@@ -182,7 +198,16 @@
 		text-transform: uppercase;
 		letter-spacing: 0.12em;
 		color: var(--text-faint);
-		margin-bottom: 14px;
+	}
+	aside {
+		position: sticky;
+		top: calc(var(--header-h) + 24px);
+		align-self: start;
+		display: grid;
+		gap: 14px;
+	}
+	aside ul + h2 {
+		margin-top: 18px;
 	}
 	aside ul {
 		display: flex;
@@ -191,8 +216,6 @@
 		list-style: none;
 		margin: 0;
 		padding: 0;
-		position: sticky;
-		top: calc(var(--header-h) + 24px);
 	}
 	.privacy {
 		display: inline-flex;
