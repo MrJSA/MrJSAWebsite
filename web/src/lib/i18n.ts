@@ -84,6 +84,8 @@ const en = {
 	stores: {
 		googlePlay: 'Get it on',
 		appStore: 'Download on the',
+		website: 'Visit the',
+		websiteLabel: 'Website',
 		web: 'Open the',
 		webLabel: 'Web app',
 		source: 'View the',
@@ -142,6 +144,8 @@ const de: UiText = {
 	stores: {
 		googlePlay: 'Jetzt bei',
 		appStore: 'Laden im',
+		website: 'Zur',
+		websiteLabel: 'Website',
 		web: 'Öffne die',
 		webLabel: 'Web-App',
 		source: 'Zum',

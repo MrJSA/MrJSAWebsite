@@ -37,6 +37,9 @@ export interface Project extends EntryBase {
 export interface StoreLinks {
 	googlePlay?: string;
 	appStore?: string;
+	/** The app's own website. */
+	website?: string;
+	/** A web version of the app. */
 	web?: string;
 	source?: string;
 }

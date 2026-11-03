@@ -11,6 +11,7 @@ status: Coming soon
 stores:
   googlePlay: https://play.google.com/store/apps/details?id=com.example.app
   # appStore: https://apps.apple.com/app/id000000000
+  # website: https://example.com        # the app's own website
   # web: https://app.example.com
   # source: https://github.com/MrJSA/example-app
 # screenshots:

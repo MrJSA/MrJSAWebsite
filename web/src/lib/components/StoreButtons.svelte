@@ -17,6 +17,7 @@
 		[
 			stores?.googlePlay && { href: stores.googlePlay, icon: 'play', small: t.stores.googlePlay, label: 'Google Play' },
 			stores?.appStore && { href: stores.appStore, icon: 'phone', small: t.stores.appStore, label: 'App Store' },
+			stores?.website && { href: stores.website, icon: 'globe', small: t.stores.website, label: t.stores.websiteLabel },
 			stores?.web && { href: stores.web, icon: 'globe', small: t.stores.web, label: t.stores.webLabel },
 			stores?.source && { href: stores.source, icon: 'github', small: t.stores.source, label: t.stores.sourceLabel }
 		].filter((b): b is Button => !!b)
