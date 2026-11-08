@@ -123,7 +123,6 @@ const homeEn: HomeSection[] = [
 			'Docker',
 			'IoT',
 			'Live Sound',
-			'Behringer X32'
 		]
 	},
 	{
@@ -211,8 +210,7 @@ const homeDe: HomeSection[] = [
 			'Prototypenbau',
 			'Docker',
 			'IoT',
-			'Live-Sound',
-			'Behringer X32'
+			'Live-Sound'
 		]
 	},
 	{
