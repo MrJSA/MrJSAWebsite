@@ -2,6 +2,7 @@
 title: This Website
 summary: A fast, fully static portfolio built with Svelte and served by a tiny Rust web server in Docker.
 date: 2026-10-16
+order: 2
 category: Software
 status: Live
 featured: true

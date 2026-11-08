@@ -2,6 +2,7 @@
 title: X32 / M32 Field Guide
 summary: A complete technical manual and field guide for the Behringer X32 and Midas M32 digital mixing consoles — 15 chapters from gain staging to AES50 stageboxes, in English and German.
 date: 2026-11-08
+order: 3
 category: Audio
 status: Live
 featured: true
@@ -10,9 +11,6 @@ links:
   - label: Read the manual
     href: https://x32.mrjsa.com
     icon: file
-  - label: Deutsche Version
-    href: https://x32.mrjsa.com/de/
-    icon: globe
   - label: Source on GitHub
     href: https://github.com/MrJSA/X32-Manual
     icon: github

@@ -7,9 +7,6 @@ links:
   - label: Handbuch lesen
     href: https://x32.mrjsa.com/de/
     icon: file
-  - label: English version
-    href: https://x32.mrjsa.com
-    icon: globe
   - label: Quellcode auf GitHub
     href: https://github.com/MrJSA/X32-Manual
     icon: github

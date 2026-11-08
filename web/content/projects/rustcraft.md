@@ -2,6 +2,7 @@
 title: RustCraft Webshop
 summary: A self-hosted webshop with a Rust backend and SvelteKit storefront and admin — payments, invoices, inventory and German/EU legal features in one Docker stack with one-click updates.
 date: 2026-10-16
+order: 1
 category: Software
 status: Live
 featured: true
