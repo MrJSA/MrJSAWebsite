@@ -122,7 +122,7 @@ const homeEn: HomeSection[] = [
 			'Prototyping',
 			'Docker',
 			'IoT',
-			'Live Sound',
+			'Live Sound'
 		]
 	},
 	{
