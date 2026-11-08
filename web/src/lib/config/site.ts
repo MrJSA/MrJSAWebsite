@@ -153,11 +153,7 @@ const homeEn: HomeSection[] = [
 		groups: [
 			{ label: 'Hardware', items: ['KiCad', 'Schematic & layout', 'DFM / JLCPCB', 'Soldering & rework'] },
 			{ label: 'Embedded', items: ['Rust (embassy, no_std)', 'C / C++', 'ESP32', 'STM32', 'nRF52'] },
-			{ label: 'Apps & Software', items: ['Rust', 'Svelte', 'Kotlin', 'TypeScript', 'Docker', 'Linux'] },
-			{
-				label: 'Live Sound',
-				items: ['Behringer X32 / Midas M32', 'AES50 stageboxes', 'Ultranet / P16', 'OSC & Mixing Station', 'Gain staging & PA tuning']
-			}
+			{ label: 'Apps & Software', items: ['Rust', 'Svelte', 'Kotlin', 'TypeScript', 'Docker', 'Linux'] }
 		]
 	},
 	{
@@ -246,11 +242,7 @@ const homeDe: HomeSection[] = [
 		groups: [
 			{ label: 'Hardware', items: ['KiCad', 'Schaltplan & Layout', 'DFM / JLCPCB', 'Löten & Rework'] },
 			{ label: 'Embedded', items: ['Rust (embassy, no_std)', 'C / C++', 'ESP32', 'STM32', 'nRF52'] },
-			{ label: 'Apps & Software', items: ['Rust', 'Svelte', 'Kotlin', 'TypeScript', 'Docker', 'Linux'] },
-			{
-				label: 'Live-Sound',
-				items: ['Behringer X32 / Midas M32', 'AES50-Stageboxen', 'Ultranet / P16', 'OSC & Mixing Station', 'Gain Staging & PA-Einmessung']
-			}
+			{ label: 'Apps & Software', items: ['Rust', 'Svelte', 'Kotlin', 'TypeScript', 'Docker', 'Linux'] }
 		]
 	},
 	{
