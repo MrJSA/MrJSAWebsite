@@ -151,7 +151,7 @@ const homeEn: HomeSection[] = [
 		eyebrow: 'Toolbox',
 		title: 'Tech I work with',
 		groups: [
-			{ label: 'Hardware', items: ['KiCad', 'Altium', 'Schematic & layout', 'DFM / JLCPCB', 'Soldering & rework'] },
+			{ label: 'Hardware', items: ['KiCad', 'Schematic & layout', 'DFM / JLCPCB', 'Soldering & rework'] },
 			{ label: 'Embedded', items: ['Rust (embassy, no_std)', 'C / C++', 'ESP32', 'STM32', 'nRF52'] },
 			{ label: 'Apps & Software', items: ['Rust', 'Svelte', 'Kotlin', 'TypeScript', 'Docker', 'Linux'] },
 			{
@@ -244,7 +244,7 @@ const homeDe: HomeSection[] = [
 		eyebrow: 'Werkzeugkasten',
 		title: 'Womit ich arbeite',
 		groups: [
-			{ label: 'Hardware', items: ['KiCad', 'Altium', 'Schaltplan & Layout', 'DFM / JLCPCB', 'Löten & Rework'] },
+			{ label: 'Hardware', items: ['KiCad', 'Schaltplan & Layout', 'DFM / JLCPCB', 'Löten & Rework'] },
 			{ label: 'Embedded', items: ['Rust (embassy, no_std)', 'C / C++', 'ESP32', 'STM32', 'nRF52'] },
 			{ label: 'Apps & Software', items: ['Rust', 'Svelte', 'Kotlin', 'TypeScript', 'Docker', 'Linux'] },
 			{
