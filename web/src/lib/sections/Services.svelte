@@ -40,6 +40,10 @@
 	.service:nth-child(4n + 4) {
 		grid-column: span 2;
 	}
+	/* An odd last card would leave a hole next to it — let it fill the row. */
+	.service:last-child:nth-child(4n + 1) {
+		grid-column: 1 / -1;
+	}
 	@media (max-width: 860px) {
 		.grid {
 			grid-template-columns: minmax(0, 1fr);

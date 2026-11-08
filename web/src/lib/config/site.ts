@@ -121,7 +121,9 @@ const homeEn: HomeSection[] = [
 			'Svelte',
 			'Prototyping',
 			'Docker',
-			'IoT'
+			'IoT',
+			'Live Sound',
+			'Behringer X32'
 		]
 	},
 	{
@@ -151,7 +153,11 @@ const homeEn: HomeSection[] = [
 		groups: [
 			{ label: 'Hardware', items: ['KiCad', 'Altium', 'Schematic & layout', 'DFM / JLCPCB', 'Soldering & rework'] },
 			{ label: 'Embedded', items: ['Rust (embassy, no_std)', 'C / C++', 'ESP32', 'STM32', 'nRF52'] },
-			{ label: 'Apps & Software', items: ['Rust', 'Svelte', 'Kotlin', 'TypeScript', 'Docker', 'Linux'] }
+			{ label: 'Apps & Software', items: ['Rust', 'Svelte', 'Kotlin', 'TypeScript', 'Docker', 'Linux'] },
+			{
+				label: 'Live Sound',
+				items: ['Behringer X32 / Midas M32', 'AES50 stageboxes', 'Ultranet / P16', 'OSC & Mixing Station', 'Gain staging & PA tuning']
+			}
 		]
 	},
 	{
@@ -169,7 +175,7 @@ const homeEn: HomeSection[] = [
 		},
 		facts: [
 			{ label: 'Based in', value: 'Germany' },
-			{ label: 'Focus', value: 'PCBs, embedded, apps' },
+			{ label: 'Focus', value: 'PCBs, embedded, apps, live sound' },
 			{ label: 'Languages', value: 'German, English' }
 		]
 	},
@@ -208,7 +214,9 @@ const homeDe: HomeSection[] = [
 			'Svelte',
 			'Prototypenbau',
 			'Docker',
-			'IoT'
+			'IoT',
+			'Live-Sound',
+			'Behringer X32'
 		]
 	},
 	{
@@ -238,7 +246,11 @@ const homeDe: HomeSection[] = [
 		groups: [
 			{ label: 'Hardware', items: ['KiCad', 'Altium', 'Schaltplan & Layout', 'DFM / JLCPCB', 'Löten & Rework'] },
 			{ label: 'Embedded', items: ['Rust (embassy, no_std)', 'C / C++', 'ESP32', 'STM32', 'nRF52'] },
-			{ label: 'Apps & Software', items: ['Rust', 'Svelte', 'Kotlin', 'TypeScript', 'Docker', 'Linux'] }
+			{ label: 'Apps & Software', items: ['Rust', 'Svelte', 'Kotlin', 'TypeScript', 'Docker', 'Linux'] },
+			{
+				label: 'Live-Sound',
+				items: ['Behringer X32 / Midas M32', 'AES50-Stageboxen', 'Ultranet / P16', 'OSC & Mixing Station', 'Gain Staging & PA-Einmessung']
+			}
 		]
 	},
 	{
@@ -256,7 +268,7 @@ const homeDe: HomeSection[] = [
 		},
 		facts: [
 			{ label: 'Standort', value: 'Deutschland' },
-			{ label: 'Schwerpunkt', value: 'Platinen, Embedded, Apps' },
+			{ label: 'Schwerpunkt', value: 'Platinen, Embedded, Apps, Live-Sound' },
 			{ label: 'Sprachen', value: 'Deutsch, Englisch' }
 		]
 	},
