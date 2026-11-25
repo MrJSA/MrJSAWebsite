@@ -5,6 +5,7 @@ date: 2026-10-16
 order: 2
 category: Software
 status: Live
+cover: /images/projects/mrjsa-website.webp
 featured: true
 tags: [Rust, Svelte, SvelteKit, Docker, GitHub Actions]
 links:
