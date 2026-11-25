@@ -21,6 +21,9 @@ others bring theirs to life.
   teams and bands: ChordPro songs, transposing with capo, chord numbers, metronome, ambient pad, tuner, music theory
   and setlists shared with the whole band. Kotlin app + a Rust sync server, now free on
   [Google Play](https://play.google.com/store/apps/details?id=com.harmonicflow.app)
+- **[X32 / M32 Field Guide](https://github.com/MrJSA/X32-Manual)** · a free, in-depth manual for the Behringer X32 and
+  Midas M32 consoles: 19 chapters from gain staging and AES50 stageboxes to Waves SuperRack Performer, in English and
+  German, at [x32.mrjsa.com](https://x32.mrjsa.com)
 - **[mrjsa.com](https://github.com/MrJSA/MrJSAWebsite)** · my website, SvelteKit + a tiny Rust server
 - **[RustCraft](https://github.com/MrJSA/RustCraft)** · the shop behind [shop.mrjsa.com](https://shop.mrjsa.com)
 - Some mods for different consoles
