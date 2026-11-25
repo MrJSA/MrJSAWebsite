@@ -1,17 +1,20 @@
 ---
-summary: Akkordblätter, Setlisten und Live-Auftritt für Lobpreisteams und Bands — ChordPro-Songs, Transponieren mit Kapo, Akkordnummern, Live-Ansicht, Metronom, Klangteppich, Stimmgerät und Setlisten, die die ganze Band teilt.
+summary: Akkordblätter, Setlisten und Live-Auftritt für Lobpreisteams und Bands — ChordPro-Songs, Transponieren mit Kapo, Akkordnummern, Live-Ansicht, Metronom, Klangteppich, Stimmgerät, Musiktheorie und Setlisten, die die ganze Band teilt. Kostenlos bei Google Play.
 status: Verfügbar
 ---
 
 ## Was es ist
 
 HarmonicFlow ist die App, die ich selbst auf der Bühne haben wollte: ein Ort für die Songs, die Setlist und alles,
-was die Band beim Spielen braucht. Die Songs liegen im offenen **ChordPro**-Format, bleiben also deine und
-funktionieren auch in anderen Apps. Alles, was du auf der Bühne brauchst, ist kostenlos — Songs, Setlisten,
-Live-Ansicht, Transponieren, Metronom, Stimmgerät und ein Klangteppich, ohne Werbung in den Live-Ansichten.
+was die Band beim Spielen braucht. Sie ist jetzt kostenlos bei
+[Google Play](https://play.google.com/store/apps/details?id=com.harmonicflow.app) erhältlich, für Handys und Tablets.
 
-Mehr über die App, die Datenschutzerklärung und einen ChordPro-Editor für den Browser gibt es auf
-[harmonicflow.mrjsa.com](https://harmonicflow.mrjsa.com/de/).
+Die Songs liegen im offenen **ChordPro**-Format, bleiben also deine und funktionieren auch in anderen Apps. Alles,
+was du auf der Bühne brauchst, ist kostenlos — Songs, Setlisten, Live-Ansicht, Transponieren, Metronom, Stimmgerät
+und ein Klangteppich, ohne Werbung in den Live-Ansichten.
+
+Mehr über die App, Schritt-für-Schritt-Anleitungen, die Datenschutzerklärung und einen ChordPro-Editor für den
+Browser gibt es auf [harmonicflow.mrjsa.com](https://harmonicflow.mrjsa.com/de/).
 
 ## Songs
 
@@ -25,39 +28,52 @@ Mehr über die App, die Datenschutzerklärung und einen ChordPro-Editor für den
   spielen kann.
 - **Musiker-Notizen** — Notizen für die ganze Band oder nur für ein Instrument, genau an der richtigen Stelle im Song.
 - **SongSelect & ChurchTools** — Songs aus CCLI SongSelect kostenlos importieren; mit Premium den Ablauf eines
-  Gottesdienstes aus ChurchTools als Setlist übernehmen.
+  Gottesdienstes aus ChurchTools als Setlist übernehmen. Songs, die in deiner Bibliothek fehlen, kommen aus
+  SongSelect oder werden als leerer Song angelegt.
 
 ## Auf der Bühne
 
 - **Setlisten** — die Songs für Gottesdienst oder Auftritt planen, mit Tonart und Notizen zu jedem Song. Die App
   öffnet die zuletzt benutzte Setlist.
-- **Live-Ansicht** — große, klare Akkordblätter für die Bühne. Wischen oder mit einem Fußpedal zum nächsten Song
-  blättern; Spalten, Schriftgröße und ♯ oder ♭ lassen sich für jeden Song einstellen.
+- **Live-Ansicht** — große, klare Akkordblätter für die Bühne, im Hoch- oder Querformat und im Vollbild. Wischen oder
+  mit einem Fußpedal zum nächsten Song blättern; das Pedal kann auch sanft durch einen Song scrollen, ein Doppeldruck
+  springt zum nächsten Abschnitt. Spalten, Schriftgröße und ♯ oder ♭ lassen sich für jeden Song einstellen.
 - **Metronom & Klangteppich** — ein Metronom und ein Pad in der Tonart des Songs, direkt neben den Akkorden. Das Pad
   „Warm“ ist kostenlos; Premium bringt weitere Klänge, darunter zwei mit sanften Meereswellen und einer Brise.
 - **PDF-Export** — Songs und ganze Setlisten als PDF drucken oder verschicken, in der gewünschten Schriftgröße, mit
-  Gitarrengriffen nach dem Titel oder am Ende.
+  Gitarrengriffen nach dem Titel oder am Ende. Eine Setlist kann auch alle Songs auf einmal als nummerierte PDFs
+  exportieren.
 
 ## Werkzeuge für Musiker
 
-- **Stimmgerät & Klanganalyse** — das Instrument stimmen und sehen, welche Töne erklingen. Der Ton verlässt nie dein
-  Gerät.
+- **Musiktheorie** — verstehen, wie Musik funktioniert, in der Tonart deiner Wahl: Quintenzirkel, die Akkorde jeder
+  Tonart, Tonleitern auf Klavier, Gitarre (auch 7-saitig) und Bass (auch 5-saitig), Intervalle, Kadenzen und die
+  Grundlagen, Schritt für Schritt.
+- **Stimmgerät & Klanganalyse** — das Instrument stimmen, auch eine 7-saitige Gitarre, und sehen, welche Töne
+  erklingen. Der Ton verlässt nie dein Gerät.
 - **Gitarrengriffe** — so greifst du die Akkorde, die die meisten Bands spielen, jeweils auf bis zu drei Arten: erst
-  die offene Lage, dann die Barrégriffe.
-- **Tonartfinder, Tonumfänge der Instrumente und die häufigsten Akkordfolgen** — schnelle Hilfen für die Probe.
+  die offene Lage, dann die Barrégriffe. Ein Suchfeld findet jeden Akkord.
+- **Tonartfinder, Tonumfänge der Instrumente und die häufigsten Akkordfolgen** — schnelle Hilfen für die Probe; die
+  Tonumfänge lassen sich auf deine Instrumente filtern.
 
 ## Premium: ein Abo für die ganze Band
 
-- **Cloud-Sync** — Songs und Setlisten sind auf allen deinen Geräten gleich.
+- **Cloud-Sync** — Songs und Setlisten sind auf allen deinen Geräten gleich; Setlisten werden bei Bedarf aus der
+  Cloud geladen.
 - **Geteilte Setlisten** — eine Setlist per Link oder QR-Code mit der Band teilen. Alle sehen Änderungen an
   Reihenfolge, Tonarten und Band-Notizen sofort; Kapo, Schriftgröße und andere persönliche Einstellungen bleiben auf
   jedem Handy. Ein Gerät spielt Metronom und Pad für die ganze Setlist.
+- **MIDI-Slave im WLAN** — ein zweites Handy oder Tablet, zum Beispiel am Mischpult, spielt Pad und Metronom und
+  folgt jedem Songwechsel. Bei kurzen WLAN-Aussetzern spielt es einfach weiter.
 - **Nur wer teilt, zahlt** — Bandmitglieder machen kostenlos mit und bekommen jede Änderung; Mitglieder mit Premium
   können selbst Tonarten, Notizen und Songs beitragen.
 
 ## Mit Sorgfalt gemacht
 
-- Auf **Deutsch, Englisch, Spanisch, Französisch, Italienisch und Portugiesisch**, mit hellem und dunklem Design.
+- Auf **Deutsch, Englisch, Spanisch, Französisch, Italienisch, Portugiesisch, Niederländisch und Schwedisch**, mit
+  hellem und dunklem Design.
+- Anmelden mit Google oder einer E-Mail-Adresse; ein vergessenes Passwort wird per Code aus einer E-Mail
+  zurückgesetzt.
 - Funktioniert ohne Internetverbindung; der Sync läuft im Hintergrund und stört auf der Bühne nie.
 - Keine Werbung, keine Analyse, kein Tracking. Der Sync-Server läuft auf meinem eigenen Server in der EU, und der Ton
   von Stimmgerät und Klanganalyse verlässt nie dein Handy.

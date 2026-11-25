@@ -17,6 +17,10 @@ others bring theirs to life.
 
 ## Working on
 
+- **[HarmonicFlow](https://harmonicflow.mrjsa.com)** · chord sheets, setlists and live performance for worship
+  teams and bands: ChordPro songs, transposing with capo, chord numbers, metronome, ambient pad, tuner, music theory
+  and setlists shared with the whole band. Kotlin app + a Rust sync server, now free on
+  [Google Play](https://play.google.com/store/apps/details?id=com.harmonicflow.app)
 - **[mrjsa.com](https://github.com/MrJSA/MrJSAWebsite)** · my website, SvelteKit + a tiny Rust server
 - **[RustCraft](https://github.com/MrJSA/RustCraft)** · the shop behind [shop.mrjsa.com](https://shop.mrjsa.com)
 - Some mods for different consoles
